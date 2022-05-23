@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "swiper": "^8.1.5"
-  },
-  "devDependencies": {
-    "@symfony/webpack-encore": "^2.1.0"
-  }
-}

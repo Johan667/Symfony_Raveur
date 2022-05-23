@@ -2,38 +2,51 @@
 
 {% block title %}RAVEUR
 {% endblock %}
-
+{% block javascripts %}
+<script src="{{ asset('js/swiper.js') }}"></script>
+{% endblock %}
 {% block body %}
-	<main>
-		<section id="tendance-accueil">
-			<article id="banniere">
-				<img src="{{ asset('img/accueil.jpeg') }}" alt="banniere accueil">
-				<div class="texte-banniere">
-					<h1>LA RAVE EST DE RETOUR</h1>
-					<button>DECOUVRIR</button>
-				</div>
-			</article>
-		</section>
+<main>
+	<section id="tendance-accueil">
+		<article id="banniere">
+			<img src="{{ asset('img/accueil.jpeg') }}" alt="banniere accueil">
+			<div class="texte-banniere">
+				<h1>Collection Néo</h1>
+				<button>DECOUVRIR</button>
+			</div>
+		</article>
+	</section>
 
-		<section id="choix-genre">
-			<article id="genre-femme">
-				<img src="{{ asset('img/femme-coeur.jpg') }}" alt="femme coeur neon">
-				<div>
-
-					<button>FEMME</button>
+	<section id="container-genre">
+		<article>
+			<div class="example">
+				<img src="{{ asset('img/femme-coeur.jpg') }}" width="300" height="500" alt="femme coeur" />
+				<div class="content">
+					<div class="text">Femme</div>
 				</div>
-			</article>
-			<article id="genre-homme">
-				<img src="{{ asset('img/homme-neon.jpeg') }}" alt="homme neon">
-				<div>
+			</div>
+		</article>
 
-					<a href="#">
-						<button>HOMME</button>
-					</a>
+		<aside>
+			<div class="example">
+				<img src="{{ asset('img/homme-neon.jpeg') }}" width="300" height="500" alt="homme neon" />
+				<div class="content">
+					<div class="text">Homme</div>
 				</div>
-			</article>
-		</section>
-		<section id="carousel1">
+			</div>
+
+		</aside>
+	</section>
+
+
+	<section id="carousel1">
 		<h2>PERFECTIONNEZ VOTRE STYLE</h2>
-		</section>
+                <article id="galerie">
+                    <div class="imgGalerie"><img class="img" src="img/blaaa.jpg" alt="Essential"></div>
+                    <div class="imgGalerie"><img class="img" src="img/hommeblond.jpeg" alt="Blond"></div>
+                    <div class="imgGalerie"><img class="img" src="img/tel.jpeg" alt="tel"></div>
+	
+                </article>
+	</section>
+
 	{% endblock %}

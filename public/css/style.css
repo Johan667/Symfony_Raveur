@@ -8,7 +8,6 @@
 #wrapper {
     max-width: 1300px;
     margin: 0 auto;
-    background-color: black;
 }
 
 /* Navbar */
@@ -24,7 +23,7 @@
 .navbar ul {
     display: flex;
     align-items: center;
-    width: 75%;
+    width: 85%;
     padding: 0;
 }
 
@@ -44,23 +43,19 @@
     border-bottom: 2px solid #ff8300 ;
 }
 
-
-.recherche .bouton{
-     background-color:#ff8300;
-     width: 35px;
-     height: 35px;
-     padding: 0; 
-}
-
 /* CSS PAGE D'ACCUEIL */
 
 /* Banniere */
-
+#tendance-accueil{
+    max-width: 1300px;
+    display: flex;
+}
 #banniere {
     position: relative;
-
 }
+
 #banniere img{
+    display: flex;
     width:1300px;
 }
 #banniere div {
@@ -78,56 +73,85 @@
     background-color: white;
 }
 
-/* Choisir les produits femme */
-#genre-femme{
-    position: relative;
-    margin-left:15%;
-}
-#genre-femme img{
-    width: 300px;
-    height : 500px;
-    margin-left: 25%;
-}
-#genre-femme button{
-    padding: 1rem 2rem;
-    border: none; 
-    background-color: white;
-}
+#container-genre{
+    display: flex;
+    margin-top: 15px;
 
-#genre-femme div{
+}
+/* HOVER SELECTION GENRE */
+.example {
+    position: relative;
+    padding: 0;
+    width: 300px;
+    display: block;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .content {
+    opacity: 0;
+    font-size: 40px;
     position: absolute;
     top: 0;
     left: 0;
-    text-align: center;
-    padding: 8em 12em 0 12em;
-    color: white;
-    font-size: 35px;
-}
-#genre-homme{
-    position: relative;
-    margin-left:15%;
-}
-#genre-homme img{
+    color: #ffffff;
+    background-color: rgba(200, 200, 200, 0.5);
     width: 300px;
-    height : 500px;
-    margin-left: 25%;
-}
-#genre-homme button{
-    padding: 1rem 2rem;
-    border: none; 
-    background-color: white;
-}
-#genre-homme div{
-    position: absolute;
-    top: 0;
-    left: 0;
+    height: 500px;
+    -webkit-transition: all 400ms ease-out;
+    -moz-transition: all 400ms ease-out;
+    -o-transition: all 400ms ease-out;
+    -ms-transition: all 400ms ease-out;
+    transition: all 400ms ease-out;
     text-align: center;
-    padding: 8em 12em 0 12em;
-    color: white;
-    font-size: 35px;
+  }
+  .example .content:hover {
+    opacity: 1;
+  }
+  .example .content .text {
+    height: 0;
+    opacity: 1;
+    transition-delay: 0s;
+    transition-duration: 0.4s;
+  }
+  .example .content:hover .text {
+    opacity: 1;
+    transform: translateY(250px);
+    -webkit-transform: translateY(250px);
+  }
+
+
+  #carousel1{
+    margin-top: 5rem;
+}
+#carousel1 h2{
+    text-align: center;
 }
 
-/* CSS LISTE DES PRODUITS */
+
+
+
+
+
+article{
+    width: 50%;
+    margin-right: 3rem;
+    margin-left: 3rem;
+    text-align: center;
+    
+}
+
+/* Aside */
+
+aside{
+    color: white;
+    width: 50%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* CSS PAGE LISTE DES PRODUITS */
 
 #choix-genre{
     margin-top: 5rem;
@@ -147,5 +171,31 @@
 }
 
 
+/* Galerie */
 
+#galerie {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    border-bottom: 1px solid #120f0f;
+    border-top: 1px solid #120f0f;
+    grid-auto-rows: 0px;
+    overflow-y: hidden;
+}
 
+#galerie div img {
+    width: 100%;
+    height: 256px;
+    object-fit: cover;
+    vertical-align: bottom;
+}
+
+.imgGalerie {
+    position: relative;
+    cursor: pointer;
+
+}
+
+.imgGalerie div {
+    display: none;
+}
