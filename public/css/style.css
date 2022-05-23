@@ -1,0 +1,151 @@
+/* CSS BASE TWIG */
+
+* {
+    box-sizing: border-box;
+
+}
+
+#wrapper {
+    max-width: 1300px;
+    margin: 0 auto;
+    background-color: black;
+}
+
+/* Navbar */
+
+.navbar {
+    display: flex;
+    padding: 1.5em;
+    background-color: black;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.navbar ul {
+    display: flex;
+    align-items: center;
+    width: 75%;
+    padding: 0;
+}
+
+.navbar ul li {
+    padding-left: 1.5em;
+    list-style: none;
+    margin: 0;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.navbar ul li a:hover {
+    border-bottom: 2px solid #ff8300 ;
+}
+
+
+.recherche .bouton{
+     background-color:#ff8300;
+     width: 35px;
+     height: 35px;
+     padding: 0; 
+}
+
+/* CSS PAGE D'ACCUEIL */
+
+/* Banniere */
+
+#banniere {
+    position: relative;
+
+}
+#banniere img{
+    width:1300px;
+}
+#banniere div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    padding: 8em 12em 0 12em;
+    color: white;
+    font-size: 35px;
+}
+#banniere button{
+    padding: 1rem 2rem;
+    border: none; 
+    background-color: white;
+}
+
+/* Choisir les produits femme */
+#genre-femme{
+    position: relative;
+    margin-left:15%;
+}
+#genre-femme img{
+    width: 300px;
+    height : 500px;
+    margin-left: 25%;
+}
+#genre-femme button{
+    padding: 1rem 2rem;
+    border: none; 
+    background-color: white;
+}
+
+#genre-femme div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    padding: 8em 12em 0 12em;
+    color: white;
+    font-size: 35px;
+}
+#genre-homme{
+    position: relative;
+    margin-left:15%;
+}
+#genre-homme img{
+    width: 300px;
+    height : 500px;
+    margin-left: 25%;
+}
+#genre-homme button{
+    padding: 1rem 2rem;
+    border: none; 
+    background-color: white;
+}
+#genre-homme div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    padding: 8em 12em 0 12em;
+    color: white;
+    font-size: 35px;
+}
+
+/* CSS LISTE DES PRODUITS */
+
+#choix-genre{
+    margin-top: 5rem;
+    display: flex;
+
+}
+
+.titre-liste-produit{
+    text-align: center;
+}
+
+#liste-tri ul{
+    display: flex;
+    list-style: none;
+    gap:2rem; 
+    font-size: 24px;
+}
+
+
+
+

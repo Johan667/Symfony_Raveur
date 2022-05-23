@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PRODUITS HOMME{% endblock %}
+
+{% block body %}
+<h1 class="titre-liste-produit">BOUTIQUE
+ HOMME</h1>
+<section>
+<article id="liste-tri">
+<ul>
+<li>Taille <i class="fa-solid fa-arrow-down"></i></li>
+<li>Couleur <i class="fa-solid fa-arrow-down"></i></li>
+<li>Prix <i class="fa-solid fa-arrow-down"></i></li></ul>
+</article>
+</section>
+<section>
+{% for article in articles %}
+<div class="card" style="width: 18rem;">
+
+  <img class="card-img-top" src="{{ asset('img/' ~ article.image) }}" alt="{{ article.Denomination }}">
+  <div class="card-body">
+    <h5 class="card-title">{{ article.Denomination }}</h5>
+    <p class="card-text">{{ article.Prix}} €</p>
+    <a href="{{ path('produit_homme_detail', {'id' : article.id}) }}" class="btn btn-primary">Acheter</a>
+  </div>
+</div>
+{% endfor %}
+
+</section>
+{% endblock %}

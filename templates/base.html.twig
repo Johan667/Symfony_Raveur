@@ -2,10 +2,14 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}RAVEUR - E commerce de vêtements et d'accesoire festifs{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
+        {% block stylesheets %}  
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+          <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+          <script src="https://kit.fontawesome.com/3f1f47ed70.js" crossorigin="anonymous"></script>
+
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
@@ -14,6 +18,27 @@
         {% endblock %}
     </head>
     <body>
+     <div id="wrapper">
+     <nav class="navbar">
+                <div id="logo">
+                    <a href="{{path('app_home')}}"><img src="{{ asset('img/logo.jpg') }}" alt="logo-rave"></a>
+                </div>
+                <ul>
+                    <li class="btnNav"><a href="#">NOUVEAUTE</a></li>
+                    <li class="btnNav"><a href="#">FEMME</a></li>
+                    <li class="btnNav"><a href="#">HOMME</a></li>        
+                    <li class="btnNav"><a href="#">ACCESSOIRES</a></li>&nbsp&nbsp&nbsp&nbsp
+                   <form action="" class="search-bar">
+  <input type="search" name="search" pattern=".*\S.*" required>
+  <button class="search-btn" type="submit">
+    <span>Rechercher</span>
+  </button>
+</form>
+                    <li class="btnNav"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                  <li class="btnNav"><a href="#"><i class="fa-solid fa-user"></i></a></li>
+                </ul>
+
+            </nav>
         {% block body %}{% endblock %}
     </body>
 </html>

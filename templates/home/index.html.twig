@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RAVEUR
+{% endblock %}
+
+{% block body %}
+	<main>
+		<section id="tendance-accueil">
+			<article id="banniere">
+				<img src="{{ asset('img/accueil.jpeg') }}" alt="banniere accueil">
+				<div class="texte-banniere">
+					<h1>LA RAVE EST DE RETOUR</h1>
+					<button>DECOUVRIR</button>
+				</div>
+			</article>
+		</section>
+
+		<section id="choix-genre">
+			<article id="genre-femme">
+				<img src="{{ asset('img/femme-coeur.jpg') }}" alt="femme coeur neon">
+				<div>
+
+					<button>FEMME</button>
+				</div>
+			</article>
+			<article id="genre-homme">
+				<img src="{{ asset('img/homme-neon.jpeg') }}" alt="homme neon">
+				<div>
+
+					<a href="#">
+						<button>HOMME</button>
+					</a>
+				</div>
+			</article>
+		</section>
+		<section id="carousel1">
+		<h2>PERFECTIONNEZ VOTRE STYLE</h2>
+		</section>
+	{% endblock %}
