@@ -1,20 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProduitController!{% endblock %}
+{% block title %}Listing Produits{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<section>
+<article id="liste-tri">
+<ul>
+<li>Taille <i class="fa-solid fa-arrow-down"></i></li>
+<li>Couleur <i class="fa-solid fa-arrow-down"></i></li>
+<li>Prix <i class="fa-solid fa-arrow-down"></i></li></ul>
+</article>
+</section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Stagiaire/Raveur/src/Controller/ProduitController.php'|file_link(0) }}">src/Controller/ProduitController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Stagiaire/Raveur/templates/produit/index.html.twig'|file_link(0) }}">templates/produit/index.html.twig</a></code></li>
-    </ul>
+    {% for article in categorie.articles %}
+    <div class="card" style="width: 18rem;">
+  <img src="{{ asset('img/' ~ article.image) }}" class="card-img-top" alt="...">
+  <div class="card-body">
+  <h5 class="card-title">{{ article }}</h5>
+    <p class="card-text">{{ article.prix }}€<br>
+    <a href="{{ path('produit_detail', {'id' : article.id}) }}" class="btn btn-primary">Acheter</a>
+    </p>
+  </div>
 </div>
+         <br>
+    {% endfor %}
+
 {% endblock %}

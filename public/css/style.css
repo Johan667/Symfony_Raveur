@@ -44,111 +44,27 @@
 }
 
 /* CSS PAGE D'ACCUEIL */
-
-/* Banniere */
-#tendance-accueil{
+.container-categories{
+    display: flex;
     max-width: 1300px;
-    display: flex;
 }
-#banniere {
-    position: relative;
-}
+/* CARTES DES CATEGORIES */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    grid-gap: 10px;
 
-#banniere img{
-    display: flex;
-    width:1300px;
-}
-#banniere div {
-    position: absolute;
-    top: 0;
-    left: 0;
-    text-align: center;
-    padding: 8em 12em 0 12em;
-    color: white;
-    font-size: 35px;
-}
-#banniere button{
-    padding: 1rem 2rem;
-    border: none; 
-    background-color: white;
 }
 
-#container-genre{
-    display: flex;
-    margin-top: 15px;
-
-}
-/* HOVER SELECTION GENRE */
-.example {
-    position: relative;
-    padding: 0;
-    width: 300px;
-    display: block;
-    cursor: pointer;
-    overflow: hidden;
-  }
-  .content {
-    opacity: 0;
-    font-size: 40px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: #ffffff;
-    background-color: rgba(200, 200, 200, 0.5);
-    width: 300px;
-    height: 500px;
-    -webkit-transition: all 400ms ease-out;
-    -moz-transition: all 400ms ease-out;
-    -o-transition: all 400ms ease-out;
-    -ms-transition: all 400ms ease-out;
-    transition: all 400ms ease-out;
-    text-align: center;
-  }
-  .example .content:hover {
-    opacity: 1;
-  }
-  .example .content .text {
-    height: 0;
-    opacity: 1;
-    transition-delay: 0s;
-    transition-duration: 0.4s;
-  }
-  .example .content:hover .text {
-    opacity: 1;
-    transform: translateY(250px);
-    -webkit-transform: translateY(250px);
-  }
-
-
-  #carousel1{
-    margin-top: 5rem;
-}
-#carousel1 h2{
-    text-align: center;
+.card {
+    display: grid;
+    grid-template-rows: max-content 200px 1fr;
 }
 
-
-
-
-
-
-article{
-    width: 50%;
-    margin-right: 3rem;
-    margin-left: 3rem;
-    text-align: center;
-    
-}
-
-/* Aside */
-
-aside{
-    color: white;
-    width: 50%;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.card img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
 /* CSS PAGE LISTE DES PRODUITS */
@@ -173,19 +89,23 @@ aside{
 
 /* Galerie */
 
+#carousel1{
+    margin-left: 15rem;
+}
 #galerie {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     border-bottom: 1px solid #120f0f;
     border-top: 1px solid #120f0f;
     grid-auto-rows: 0px;
     overflow-y: hidden;
+
 }
 
 #galerie div img {
     width: 100%;
-    height: 256px;
+    height: 400px;
     object-fit: cover;
     vertical-align: bottom;
 }

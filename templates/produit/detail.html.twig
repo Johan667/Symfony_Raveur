@@ -1,21 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}PRODUITS HOMME{% endblock %}
+{% block title %}PRODUIT{% endblock %}
 
 {% block body %}
-<h1 class="titre-liste-produit">
+
 {% for article in articles %}
- HOMME | {{ article.Denomination }}</h1>
+ <h1>{{ article }}</h1>
 
-<section>
-
-  <img class="card-img-top" src="{{ asset('img/' ~ article.image) }}" alt="{{ article.Denomination }}">
-
-    <h5 class="card-title">{{ article.Denomination }}</h5>
-    <p class="card-text">{{ article.Prix}} €</p>
-    <a href="{{ path('produit_homme_detail', {'id' : article.id}) }}" class="btn btn-primary">Acheter</a>
-
+{{dump(article)}}
 {% endfor %}
-{{dump(article.Denomination)}}
-</section>
+
+
 {% endblock %}

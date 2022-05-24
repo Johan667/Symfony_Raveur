@@ -20,20 +20,9 @@ class ProduitController extends AbstractController
             'controller_name' => 'ProduitController',
         ]);
     }
-        /**
-     * @Route("/produit/categorie/{idC}", name="produit_categorie_detail")
-     */
-    public function produitCategorie(ManagerRegistry $doctrine, ArticleRepository $ar, CategorieRepository $ca): Response
-    {
-        $categorie = $ca->findAll();
-        $articles = $ar->findBy(["categorie" => $categorie->getId()]);
-        return $this->render('produit/produit_homme.html.twig', [
-            'articles'=> $articles,         
-        ]);
-    }
   
     /**
-     * @Route("/produit/homme/{id}", name="produit_homme_detail")
+     * @Route("/produit/{id}", name="produit_detail")
      */
     public function produitHommeDetail(ManagerRegistry $doctrine, ArticleRepository $ar, int $id): Response
     {  
@@ -42,14 +31,5 @@ class ProduitController extends AbstractController
             'articles'=> $articles,  
         ]);
     }
-    /**
-     * @Route("/produit/femme/{id}", name="produit_femme_detail")
-     */
-    public function produitFemmeDetail(ManagerRegistry $doctrine, ArticleRepository $ar, int $id): Response
-    {  
-        $articles = $ar->find($id);
-        return $this->render('produit/detail.html.twig', [    
-            'articles'=> $articles,  
-        ]);
-    }
+
 }
