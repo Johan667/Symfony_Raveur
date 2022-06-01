@@ -30,7 +30,7 @@ class PanierController extends AbstractController
         }
 
         return $this->render('panier/index.html.twig', [
-            'total_articles' => $panierWithData,
+            'items' => $panierWithData,
         ]);
     }
     /**
@@ -41,7 +41,7 @@ class PanierController extends AbstractController
 
     // container de service https://www.youtube.com/watch?v=frAXgi9D6fo php bin/console debug:autowiring session demander le service de session interface
 
-    public function ajouterArticle($id, SessionInterface $session, Request $request): Response
+    public function ajouterArticle($id, SessionInterface $session, Request $request, ArticleRepository $article): Response
     {
         $panier = $session->get('panier', []);
    

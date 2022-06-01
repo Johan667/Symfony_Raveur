@@ -7,7 +7,7 @@
 
 <h1>PANIER</h1>
 
-{% if total_articles | length > 0 %}
+{% if items | length > 0 %}
 <div class="row">
 <div class="col-4">
 
@@ -27,19 +27,17 @@
             </tr>
         </thead>
         <tbody>
-
+            {% for item in items %}
+                
+          
             <tr>
-                <td>#</td>
-                <td>Nom produit</td>
-                <td>prix unitaire €</td>
-                <td><a href="#"><i
-                            class="fa-solid fa-minus"></i></a> Quantité<a
-                        href="#"><i class="fa-solid fa-plus"></i></a></td>
-                <td>Total euro produit</td>
-                <td><a href="#" target="__blank">Voir fiche produit</a></td>
-                <td><a href="#"> <i class="fa-solid fa-trash"></i></a>
-                </td>
+              <td>{{ items.article.denomination }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
             </tr>
+              {% endfor %}
             {# <?php $totalGeneral += $produit['total']; ?>
             <?php } ?> #}
             <tr>
