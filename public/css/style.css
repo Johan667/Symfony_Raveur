@@ -119,3 +119,11 @@
 .imgGalerie div {
     display: none;
 }
+
+/* Detail Article */
+
+
+.image-principale{
+    max-width: 500px;
+    max-height: 600px;
+}

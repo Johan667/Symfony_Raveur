@@ -4,11 +4,40 @@
 
 {% block body %}
 
-{% for article in articles %}
- <h1>{{ article }}</h1>
+<section class="fiche-produit">
+        <div class="row">
+            <div class="col-6">
+                <div class="image-principale">
+                    <img src="{{ asset('img/' ~ article.image) }}" class="card-img-top" alt="{{ article }}">
+                </div>
+            </div>
+        
+        <div class="col-6">
+        <h1>{{ article }}</h1>
+        {{ article.prix }} €<br>
+        Couleur - {{ article.couleur }}<br>
+        Taille - {{ article.taille }}<br>
+        {#} ICI DEFINIR LES BOUTON DE SELECTION DE TAILLE AFFICHER UNIQUEMENT LES DISPONIBLE {#}
+        <form action="{{ path('panier_ajouter', {'id' : article.id}) }}" method="post" >
+        <select name="quantite" id="qte">
+        {% for i in 1..100 %}
+        <option value="{{ i }}"> {{ i }} </option> 
+        {% endfor %}
+       
+        </select>
+        <button class="btn btn-primary">Ajouter au panier</button>
+       </form>
 
-{{dump(article)}}
-{% endfor %}
+
+        <br><h2>DESCRIPTION</h2>
+        {{ article.description }}
+        </div>
+    </div>
+</section>
+
+<h2>PRODUIT SIMILAIRES</h2>
+
+
 
 
 {% endblock %}

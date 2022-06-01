@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -24,11 +25,11 @@ class ProduitController extends AbstractController
     /**
      * @Route("/produit/{id}", name="produit_detail")
      */
-    public function produitHommeDetail(ManagerRegistry $doctrine, ArticleRepository $ar, int $id): Response
+    public function produitDetail(ManagerRegistry $doctrine, ArticleRepository $ar, Article $article): Response
     {  
-        $articles = $ar->find($id);
+        // $articles = $ar->find($id);
         return $this->render('produit/detail.html.twig', [    
-            'articles'=> $articles,  
+            'article'=> $article,  
         ]);
     }
 

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre Panier{% endblock %}
+
+
+{% block body %}
+
+<h1>PANIER</h1>
+
+{% if total_articles | length > 0 %}
+<div class="row">
+<div class="col-4">
+
+</div>
+<div class="col-8">
+<h2>Votre Panier</h2>
+  <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Total</th>
+                <th scope="col">Détail</th>
+                <th scope="col">Supprimer article</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>#</td>
+                <td>Nom produit</td>
+                <td>prix unitaire €</td>
+                <td><a href="#"><i
+                            class="fa-solid fa-minus"></i></a> Quantité<a
+                        href="#"><i class="fa-solid fa-plus"></i></a></td>
+                <td>Total euro produit</td>
+                <td><a href="#" target="__blank">Voir fiche produit</a></td>
+                <td><a href="#"> <i class="fa-solid fa-trash"></i></a>
+                </td>
+            </tr>
+            {# <?php $totalGeneral += $produit['total']; ?>
+            <?php } ?> #}
+            <tr>
+                <td>Total général:</td>
+                {# <td><?= number_format($totalGeneral, 2, ',', '&nbsp;'); ?>&nbsp;€</td> #}
+                <td><a href="#"><button class="btn btn-success">Vider le panier
+                </button></a></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+</div>
+{% else %}
+VOTRE PANIER EST VIDE
+{% endif %}
+
+{% endblock %}
