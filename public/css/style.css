@@ -127,3 +127,22 @@
     max-width: 500px;
     max-height: 600px;
 }
+
+/* Etapes Paiement */
+
+.paiement .etapes-paiement{
+    margin-top: 2rem;
+    margin-bottom:2rem;
+    font-size: 20px;
+    gap:5rem;
+
+}
+
+.cadre-express{
+bo
+}
+.trait
+{
+border-top: 1px solid #000;
+width : 600px;
+}
