@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
-use App\Service\Panier\PanierService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,6 +20,7 @@ class PanierController extends AbstractController
         $panier = $session->get('panier', []);
         $panierWithData = [];
 
+       
         // Tableau associatif qui contient un couple avec toutes les informations du produit et la quantité
         foreach($panier as $id =>$quantite){
             $panierWithData[] = [
@@ -43,8 +43,6 @@ class PanierController extends AbstractController
 
         ]);
     }
-
-
     /**
      * @Route("/panier/ajouter/{id}", name="panier_ajouter")
      */
@@ -53,10 +51,21 @@ class PanierController extends AbstractController
 
     // container de service https://www.youtube.com/watch?v=frAXgi9D6fo php bin/console debug:autowiring session demander le service de session interface
 
-    public function ajouterArticle(int $id, PanierService $panierService ): Response
+    public function ajouterArticle(int $id, SessionInterface $session, Request $request, ArticleRepository $article): Response
     {
-        
-    $panierService->ajouterArticles($id);
+        $session = $request->getSession();
+    
+        $panier = $session->get('panier', []);
+   
+        if(!empty($panier[$id])){
+           
+         $panier[$id] += $request->request->get('quantite');
+
+        }else{
+            $panier[$id] = $request->request->get('quantite');
+        }
+
+        $session->set('panier', $panier);
 
         return $this->redirectToRoute('panier');
     }
@@ -73,6 +82,6 @@ class PanierController extends AbstractController
         $session->set('panier', $panier);
 
         return $this->redirectToRoute('panier');
-      
+       
     }
 }
