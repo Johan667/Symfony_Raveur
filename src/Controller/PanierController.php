@@ -15,24 +15,35 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier", name="panier")
      */
-    public function index(SessionInterface $session, ArticleRepository $article): Response
+    public function index(SessionInterface $session, ArticleRepository $articleRepository): Response
     {
         $panier = $session->get('panier', []);
-
         $panierWithData = [];
+
         // Tableau associatif qui contient un couple avec toutes les informations du produit et la quantité
-        foreach($panier as $id => $quantite){
+        foreach($panier as $id =>$quantite){
             $panierWithData[] = [
-                'article'=> $article->find($id),
+                'article'=> $articleRepository->find($id),
                 'quantite'=> $quantite,
 
             ];
         }
 
+        $total = 0;
+
+        foreach($panierWithData as $item){
+            $totalItem= $item['article']->getPrix() * $item['quantite'];
+            $total += $totalItem;
+        }
+        dd($panierWithData);
         return $this->render('panier/index.html.twig', [
             'items' => $panierWithData,
+            'total'=> $total,
+
         ]);
     }
+
+    
     /**
      * @Route("/panier/ajouter/{id}", name="panier_ajouter")
      */
@@ -41,18 +52,22 @@ class PanierController extends AbstractController
 
     // container de service https://www.youtube.com/watch?v=frAXgi9D6fo php bin/console debug:autowiring session demander le service de session interface
 
-    public function ajouterArticle($id, SessionInterface $session, Request $request, ArticleRepository $article): Response
+    public function ajouterArticle(int $id, SessionInterface $session, Request $request, ArticleRepository $article): Response
     {
+        $session = $request->getSession();
+    
         $panier = $session->get('panier', []);
    
         if(!empty($panier[$id])){
-            $panier[$id] += $request->request->get('quantite');
+           
+         $panier[$id] += $request->request->get('quantite');
+
         }else{
             $panier[$id] = $request->request->get('quantite');
         }
-       
+
         $session->set('panier', $panier);
-       
+
         return $this->render('panier/index.html.twig', [
             'article' => $article,
         ]);
@@ -61,10 +76,15 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier/supprimer/{id}", name="panier_supprimer")
      */
-    public function SupprimerArticle(Article $article): Response
+    public function SupprimerArticle($id, SessionInterface $session): Response
     {
-        return $this->render('panier/index.html.twig', [
-            'article' => '$article',
-        ]);
+        $panier = $session->get('panier', []);
+        if(!empty($panier[$id])){
+            unset($panier[$id]);
+        }
+        $session->set('panier', $panier);
+
+        return $this->redirectToRoute('panier');
+      
     }
 }
