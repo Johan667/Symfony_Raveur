@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use App\Service\Panier\PanierService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,7 +36,7 @@ class PanierController extends AbstractController
             $totalItem= $item['article']->getPrix() * $item['quantite'];
             $total += $totalItem;
         }
-        dd($panierWithData);
+
         return $this->render('panier/index.html.twig', [
             'items' => $panierWithData,
             'total'=> $total,
@@ -43,7 +44,7 @@ class PanierController extends AbstractController
         ]);
     }
 
-    
+
     /**
      * @Route("/panier/ajouter/{id}", name="panier_ajouter")
      */
@@ -52,25 +53,12 @@ class PanierController extends AbstractController
 
     // container de service https://www.youtube.com/watch?v=frAXgi9D6fo php bin/console debug:autowiring session demander le service de session interface
 
-    public function ajouterArticle(int $id, SessionInterface $session, Request $request, ArticleRepository $article): Response
+    public function ajouterArticle(int $id, PanierService $panierService ): Response
     {
-        $session = $request->getSession();
-    
-        $panier = $session->get('panier', []);
-   
-        if(!empty($panier[$id])){
-           
-         $panier[$id] += $request->request->get('quantite');
+        
+    $panierService->ajouterArticles($id);
 
-        }else{
-            $panier[$id] = $request->request->get('quantite');
-        }
-
-        $session->set('panier', $panier);
-
-        return $this->render('panier/index.html.twig', [
-            'article' => $article,
-        ]);
+        return $this->redirectToRoute('panier');
     }
 
     /**
