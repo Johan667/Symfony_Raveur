@@ -2,13 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
 class PanierController extends AbstractController
 {
@@ -20,29 +19,27 @@ class PanierController extends AbstractController
         $panier = $session->get('panier', []);
         $panierWithData = [];
 
-       
         // Tableau associatif qui contient un couple avec toutes les informations du produit et la quantité
-        foreach($panier as $id =>$quantite){
+        foreach ($panier as $id => $quantite) {
             $panierWithData[] = [
-                'article'=> $articleRepository->find($id),
-                'quantite'=> $quantite,
-
+                'article' => $articleRepository->find($id),
+                'quantite' => $quantite,
             ];
         }
 
         $total = 0;
 
-        foreach($panierWithData as $item){
-            $totalItem= $item['article']->getPrix() * $item['quantite'];
+        foreach ($panierWithData as $item) {
+            $totalItem = $item['article']->getPrix() * $item['quantite'];
             $total += $totalItem;
         }
 
         return $this->render('panier/index.html.twig', [
             'items' => $panierWithData,
-            'total'=> $total,
-
+            'total' => $total,
         ]);
     }
+
     /**
      * @Route("/panier/ajouter/{id}", name="panier_ajouter")
      */
@@ -54,14 +51,12 @@ class PanierController extends AbstractController
     public function ajouterArticle(int $id, SessionInterface $session, Request $request, ArticleRepository $article): Response
     {
         $session = $request->getSession();
-    
-        $panier = $session->get('panier', []);
-   
-        if(!empty($panier[$id])){
-           
-         $panier[$id] += $request->request->get('quantite');
 
-        }else{
+        $panier = $session->get('panier', []);
+
+        if (!empty($panier[$id])) {
+            $panier[$id] += $request->request->get('quantite');
+        } else {
             $panier[$id] = $request->request->get('quantite');
         }
 
@@ -76,12 +71,11 @@ class PanierController extends AbstractController
     public function SupprimerArticle($id, SessionInterface $session): Response
     {
         $panier = $session->get('panier', []);
-        if(!empty($panier[$id])){
+        if (!empty($panier[$id])) {
             unset($panier[$id]);
         }
         $session->set('panier', $panier);
 
         return $this->redirectToRoute('panier');
-       
     }
 }

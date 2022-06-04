@@ -13,7 +13,7 @@
     {% endblock %}
 
     {% block javascripts %}
-<script src="{{ asset('js/swiper.js') }}"></script>
+    <script src="{{ asset('js/swiper.js') }}"></script>
     {% endblock %}
 </head>
 
@@ -24,10 +24,14 @@
                 <a href="{{path('app_home')}}"><img src="{{ asset('img/logo.jpg') }}" alt="logo-rave"></a>
             </div>
             <ul>
-                <li class="btnNav"><a href="#">NOUVEAUTE</a></li>
-                <li class="btnNav"><a href="#">FEMME</a></li>
-                <li class="btnNav"><a href="#">HOMME</a></li>
-                <li class="btnNav"><a href="#">ACCESSOIRES</a></li>
+                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 1 }) }}">HOMME</a></li>
+                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 2 }) }}">FEMME</a></li>
+                  <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 6 }) }}">FESTIVAL</a></li>
+                 <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 3 }) }}">NEON</a></li>
+                   <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 4 }) }}">BIJOUX</a></li>
+                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 7 }) }}">ACCESSOIRES</a></li>
+               
+                
                 <li class="btnNav"><input type="text" class="Recherche" placeholder="Vous cherchez ?"></li>
                 <li class="btnNav"><button type="submit" class="searchButton"> <i class="fa fa-search"></i></li>
 

@@ -6,24 +6,30 @@
 
 <section>
   <article id="liste-tri">
-  <ul>
-  <li>Taille <i class="fa-solid fa-arrow-down"></i></li>
-  <li>Couleur <i class="fa-solid fa-arrow-down"></i></li>
-  <li>Prix <i class="fa-solid fa-arrow-down"></i></li></ul>
+    <ul>
+      <li>Taille <i class="fa-solid fa-arrow-down"></i></li>
+      <li>Couleur <i class="fa-solid fa-arrow-down"></i></li>
+      <li>Prix <i class="fa-solid fa-arrow-down"></i></li>
+    </ul>
   </article>
 </section>
 
-    {% for article in categorie.articles %}
-      <div class="card" style="width: 18rem;">
-        <img src="{{ asset('img/' ~ article.image) }}" class="card-img-top" alt="{{ article }}">
-        <div class="card-body">
-            <h5 class="card-title">{{ article }}</h5>
-            <p class="card-text">{{ article.prix }}€<br>
-            <a href="{{ path('produit_detail', {'id' : article.id}) }}" class="btn btn-primary">Acheter</a>
-            </p>
-        </div>
-      </div>
-         <br>
-    {% endfor %}
+<div class="cards-align">
+  {% for article in categorie.articles %}
+
+  <div class="card" style="width: 18rem;">
+    <img src="{{ asset('img/' ~ article.image) }}" class="card-img-top" alt="{{ article }}">
+    <div class="card-body">
+      <h5 class="card-title">{{ article }}</h5>
+      <p class="card-text">{{ article.prix }}€<br>
+        <a href="{{ path('produit_detail', {'id' : article.id}) }}" class="btn btn-primary">Acheter</a>
+      </p>
+    </div>
+  </div>
+
+
+  {% endfor %}
+</div>
+
 
 {% endblock %}

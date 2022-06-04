@@ -6,58 +6,32 @@ RAVEUR
 
 {% block body %}
 <main>
-<div class="container-categories">
-	{% for categorie in categories %}
-	
+	<img id="imgaccueil" src="img/accueil.jpeg" alt="accueil-raveur">
+	{# <div class="container-categories">
+		{% for categorie in categories %}
+
 		<article class="card">
 			<div class="cards">
-			<h2><a href="{{path('produit_categorie',{'id':categorie.id})}}">{{ categorie }}</a></h2>
-
-			{# Image ici #}
-			{# <div class="content">
-			<p> BLAAA </p>
-			</div> #}
+				<h2><a href="{{path('produit_categorie',{'id':categorie.id})}}">{{ categorie }}</a></h2>
 		</article>
+		{% endfor %}
+	</div> #}
 
-	
-	{% endfor %}
-</div>
-	
-		{# <article>
-		
-			<div class="example">
-				<img src="{{ asset('img/femme-coeur.jpg') }}" width="300" height="500" alt="femme coeur" />
-				<div class="content">
-				<a href="{{path('produit_categorie',{'id':categorie.id})}}">Femme</a> 
-				</div>
-			</div>
-		</article>
+	<div class="rubriquechoix">
+		<a href="{{path('produit_categorie',{'id':2})}}"><img src="{{ asset('img/femme-coeur.jpg') }}" width="300" height="500" alt="femme coeur" /></a>
+		<a href="{{path('produit_categorie',{'id':1})}}"><img src="{{ asset('img/homme-neon.jpeg') }}" width="300" height="500" alt="homme neon" /></a>
+	</div>
 
-		<aside>
-			<div class="example">
-				<img src="{{ asset('img/homme-neon.jpeg') }}" width="300" height="500" alt="homme neon" />
-				<div class="content">
-					<div class="text">
-					<a href="{{path('produit_categorie',{'id':categorie.id})}}">Homme</a> 
-					</div>
-				</div>
-			</div>
-
-		</aside> #}
-		
-	</section>
-
-
-	{# <section id="carousel1">
+	<section id="carousel1">
 		<h2>PERFECTIONNEZ VOTRE STYLE</h2>
                 <article id="galerie">
-                    {# <div class="imgGalerie"><img class="img" src="img/blaaa.jpg" alt="Essential"></div>
+                   <div class="imgGalerie"><img class="img" src="img/blaaa.jpg" alt="Essential"></div>
                     <div class="imgGalerie"><img class="img" src="img/hommeblond.jpeg" alt="Blond"></div>
                     <div class="imgGalerie"><img class="img" src="img/tel.jpeg" alt="tel"></div>
 					<div class="imgGalerie"><img class="img" src="img/neoon.jpeg" alt="tel"></div>
-						<div class="imgGalerie"><img class="img" src="img/homme-neon-rouge.jpg" alt="tel"></div>
+					<div class="imgGalerie"><img class="img" src="img/homme-neon-rouge.jpg" alt="tel"></div>
 
                 </article>
-	</section> #}
+	</section>
 
 	{% endblock %}
