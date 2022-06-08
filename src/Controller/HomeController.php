@@ -16,6 +16,7 @@ class HomeController extends AbstractController
      */
     public function index(ManagerRegistry $doctrine, CategorieRepository $ca): Response
     {
+        // Je cherche dans le repository Categorie l'ensemble des informations
         $categories = $ca->findAll();
 
         return $this->render('home/index.html.twig', [

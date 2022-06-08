@@ -25,6 +25,7 @@ class ProduitController extends AbstractController
     /**
      * @Route("/produit/{id}", name="produit_detail")
      */
+    // J'informe dans le routing que je veux afficher le detail d'un produit en passant par son ID
     public function produitDetail(ManagerRegistry $doctrine, ArticleRepository $ar, Article $article): Response
     {  
         // $articles = $ar->find($id);

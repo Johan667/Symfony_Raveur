@@ -39,10 +39,16 @@ class Categorie
      */
     private $clients;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="categorie")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->clients = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -136,5 +142,32 @@ class Categorie
 
     public function __toString() {
         return $this->nom;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeCategorie($this);
+        }
+
+        return $this;
     }
 }

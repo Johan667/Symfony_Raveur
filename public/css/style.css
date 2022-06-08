@@ -152,6 +152,8 @@ text-align: center;
 {
 border-top: 1px solid #000;
 width : 400px;
+margin-top: 3rem;
+margin-bottom: 3rem;
 }
 
 #etapes{
@@ -163,6 +165,10 @@ width : 400px;
 .fa-cart-shopping .fa-user .fa-truck-fast .fa-credit-card .fa-face-grin-hearts{
 font-size: 50px;
 
+}
+
+.paiement-express{
+    font-size: 450px;
 }
 
 .container-recap{
