@@ -61,7 +61,7 @@ class PaiementController extends AbstractController
         ]);
 }
     /**
-     * @Route("/payment/souscription/{id}/recap", name="payment_commande", methods={"GET","POST"})
+     * @Route("/payment/commande/{id}/recap", name="payment_commande", methods={"GET","POST"})
      * @param Article $article
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse\Response

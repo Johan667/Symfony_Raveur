@@ -148,6 +148,8 @@ var form = document.getElementById('formulaire-paiement');
 form.addEventListener('submit', function(event) => {
 event.preventDefault();
 
+
+
 stripe.handleCardPayment(
   clientSecret,
   card,
@@ -165,9 +167,43 @@ stripe.handleCardPayment(
   }else if('paymentIntent' in result){
     console.log(' Result paymentIntent', result);
     stripeTokenHandler(result.paymentIntent);
+     console.log('Result paymentIntent : ',result.paymentIntent);
   }
 } )
 });
+
+function stripeTokenHandler(intent){
+
+  var form = document.getElementById('formulaire-paiement');
+  var InputIntentId = document.createElement('input');
+  var InputIntentPayementMethod = document.createElement('input');
+  var InputIntentStatus = document.createElement('input');
+  var InputCommande = document.createElement('input');
+
+  InputIntentId.setAttribute('type','hidden');
+  InputIntentId.setAttribute('name', 'stripeIntentId');
+  InputIntentId.setAttribute('value', intent.id);
+
+  InputIntentPayementMethod.setAttribute('type','hidden');
+  InputIntentPayementMethod.setAttribute('name', 'stripeIntentPayementMethod');
+  InputIntentPayementMethod.setAttribute('value', intent.payment_method);
+
+  InputIntentStatus.setAttribute('type','hidden');
+  InputIntentStatus.setAttribute('name', 'InputIntentStatus');
+  InputIntentStatus.setAttribute('value', intent.status);
+
+  InputCommande.setAttribute('type','hidden');
+  InputCommande.setAttribute('name', 'InputCommande');
+  InputCommande.setAttribute('value', commande);
+
+  form.appendChild(InputIntentId);
+  form.appendChild(InputIntentPayementMethod);
+  form.appendChild(InputIntentStatus);
+  form.appendChild(InputCommande);
+  form.submit();
+
+
+}
 
 </script>
 
