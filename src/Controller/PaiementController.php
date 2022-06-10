@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use App\Controller\ProduitController;
 use App\Repository\ArticleRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PaiementController extends AbstractController
 {
@@ -40,4 +43,46 @@ class PaiementController extends AbstractController
             'total' => $total,
         ]);
     }
+
+    /**
+     * @Route("/payment/{id}/recap", name="payment", methods={"GET","POST"})
+     * @param Article $article
+     * @return Response
+     */
+    public function payment(Article $article, ProduitController $produitController): Response
+    {
+        if(!$this->getUser()){
+            return $this->redirectToRoute('login');
+        }
+        return $this->render('paiement/index.html.twig', [
+            'user'=>$this->getUser(),
+            'intentSecret'=> $produitController->intentSecret(),
+            'article'=>$article,   
+        ]);
+}
+    /**
+     * @Route("/payment/souscription/{id}/recap", name="payment_commande", methods={"GET","POST"})
+     * @param Article $article
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse\Response
+     * @throws \Exception
+     */
+    public function commande(Article $article, ProduitController $produitController, Request $request){
+
+        $user = $this->getUser();
+
+        if($request->getMethod() === "POST"){
+            $ressource = $produitController->stripe($_POST, $article);
+
+            if(null !== $ressource){
+            $produitController->creation_commande($ressource, $article, $user);
+
+            return $this->render('paiement/reponse.html.twig', [
+                'article'=>$article
+            ]);
+            }
+        }
+        return $this->redirectToRoute('payment',['id'=>$article->getId()]);
+    }
+
 }
