@@ -218,6 +218,15 @@
 
 /* Detail Article */
 
+.prod-sim{
+    padding:5rem;
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.produits-tendance{
+    text-align: center;
+}
 
 .image-principale{
     max-width: 500px;

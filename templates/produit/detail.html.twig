@@ -34,8 +34,26 @@
         </div>
     </div>
 </section>
-
-<h2>PRODUIT SIMILAIRES</h2>
-
-
+<section>
+        <div class="row">
+            <div class="col-9">
+<h2 class="prod-sim">PRODUIT SIMILAIRES</h2>
+<div class="produits-tendance">
+  <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true, "pageDots": false, "prevNextButtons": false, "autoPlay": 3000 }'>
+	
+	{% for article in articles %}
+		<div class="carousel-cell">
+			<img src="{{ asset('img/' ~ article.image) }}" alt="" height="300px" >
+			<div class="denomination-card">
+			<p>{{ article.denomination }}</p><br>
+			<p>{{ article.prix }} €</p>
+			</div>
+			
+		</div>
+	{% endfor %}
+  </div>
+</div>
+</div>
+</div>
+<section>
 {% endblock %}

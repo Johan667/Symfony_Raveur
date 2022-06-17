@@ -36,9 +36,11 @@ class ProduitController extends AbstractController
     // J'informe dans le routing que je veux afficher le detail d'un produit en passant par son ID
     public function produitDetail(ManagerRegistry $doctrine, ArticleRepository $ar, Article $article): Response
     {  
-        // $articles = $ar->find($id);
+        $articles = $ar->findBy(["tendance" => 1]);
+        
         return $this->render('produit/detail.html.twig', [    
-            'article'=> $article,  
+            'articles'=> $articles,  
+            'article'=>$article,
         ]);
     }
 
