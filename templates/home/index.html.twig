@@ -6,32 +6,60 @@ RAVEUR
 
 {% block body %}
 <main>
-	<img id="imgaccueil" src="img/accueil.jpeg" alt="accueil-raveur">
-	{# <div class="container-categories">
-		{% for categorie in categories %}
+	
+<div class="contenant">
+  <img id="imgaccueil" src="img/accueil.jpeg" alt="accueil-raveur">
+  <div class="texte_centre">NOUVEAUTE</div>
+</div>
 
-		<article class="card">
-			<div class="cards">
-				<h2><a href="{{path('produit_categorie',{'id':categorie.id})}}">{{ categorie }}</a></h2>
-		</article>
-		{% endfor %}
-	</div> #}
 
-	<div class="rubriquechoix">
-		<a href="{{path('produit_categorie',{'id':2})}}"><img src="{{ asset('img/femme-coeur.jpg') }}" width="300" height="500" alt="femme coeur" /></a>
-		<a href="{{path('produit_categorie',{'id':1})}}"><img src="{{ asset('img/homme-neon.jpeg') }}" width="300" height="500" alt="homme neon" /></a>
-	</div>
+<table border="0" width="100%">
+	<tr>
+		
+		<td width="50%" align="center">
+			<div class="example">
+				<a href="{{path('produit_categorie',{'id':2})}}"><img src="{{ asset('img/femme-coeur.jpg') }}" width="300" height="500" alt="femme coeur" /></a>
+					<div class="content">
+					<div class="text">Femme</div>
+				</div>
+			</div>
+		</td>
+		<td width="50%" align="center">
+			<div class="example">
+			<a href="{{path('produit_categorie',{'id':1})}}"><img src="{{ asset('img/homme-neon.jpeg') }}" width="300" height="500" alt="homme neon" /></a>					<div class="content">
+				<div class="text">Homme</div>
+				</div>
+			</div>
+		</td>
+	</tr>
+</table>
 
-	<section id="carousel1">
-		<h2>PERFECTIONNEZ VOTRE STYLE</h2>
-                <article id="galerie">
-                   <div class="imgGalerie"><img class="img" src="img/blaaa.jpg" alt="Essential"></div>
-                    <div class="imgGalerie"><img class="img" src="img/hommeblond.jpeg" alt="Blond"></div>
-                    <div class="imgGalerie"><img class="img" src="img/tel.jpeg" alt="tel"></div>
+
+
+		
+
+	<h1 class="perfectionnez">PERFECTIONNEZ VOTRE STYLE</h1>
+<div class="pic-ctn">
+    <img src="img/perle.jpg" alt="" class="pic">
+    <img src="img/soleilune.png" alt="" class="pic">
+    <img src="img/tel.jpeg" alt="" class="pic">
+    <img src="img/thermos.png" alt="" class="pic">
+    <img src="img/UVV.png" alt="" class="pic">
+  </div>
+
+</main>
+
+
+{#                    
+                  
 					<div class="imgGalerie"><img class="img" src="img/neoon.jpeg" alt="tel"></div>
 					<div class="imgGalerie"><img class="img" src="img/homme-neon-rouge.jpg" alt="tel"></div>
-
-                </article>
-	</section>
+ #}
 
 	{% endblock %}
+
+{% block javascript %}
+<script>
+
+</script>
+{% endblock %}

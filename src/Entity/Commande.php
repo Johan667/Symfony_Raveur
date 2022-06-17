@@ -95,9 +95,15 @@ class Commande
      */
     private $status_stripe;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=article::class, inversedBy="commandes")
+     */
+    private $article_id;
+
     public function __construct()
     {
         $this->stockers = new ArrayCollection();
+        $this->article_id = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -299,6 +305,30 @@ class Commande
     public function setStatusStripe(?string $status_stripe): self
     {
         $this->status_stripe = $status_stripe;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, article>
+     */
+    public function getArticleId(): Collection
+    {
+        return $this->article_id;
+    }
+
+    public function addArticleId(article $articleId): self
+    {
+        if (!$this->article_id->contains($articleId)) {
+            $this->article_id[] = $articleId;
+        }
+
+        return $this;
+    }
+
+    public function removeArticleId(article $articleId): self
+    {
+        $this->article_id->removeElement($articleId);
 
         return $this;
     }

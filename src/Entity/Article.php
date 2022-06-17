@@ -89,10 +89,16 @@ class Article
      */
     private $stockers;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Commande::class, mappedBy="article_id")
+     */
+    private $commandes;
+
     public function __construct()
     {
         $this->tailles = new ArrayCollection();
         $this->stockers = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -303,6 +309,33 @@ class Article
 
     public function __toString() {
         return $this->denomination;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->addArticleId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->removeElement($commande)) {
+            $commande->removeArticleId($this);
+        }
+
+        return $this;
     }
 
 
