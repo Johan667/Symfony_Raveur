@@ -5,57 +5,58 @@ RAVEUR
 {% endblock %}
 
 {% block body %}
+
 <main>
 	
 <div class="contenant">
   <img id="imgaccueil" src="img/accueil.jpeg" alt="accueil-raveur">
-  <div class="texte_centre">NOUVEAUTE</div>
+  <div class="texte_centre"><a href="{{ path('produit_categorie', { 'id': 3 }) }}">COLLECTION NEON</a></div>
 </div>
 
-
 <table border="0" width="100%">
-	<tr>
-		
+	<tr>		
 		<td width="50%" align="center">
 			<div class="example">
-				<a href="{{path('produit_categorie',{'id':2})}}"><img src="{{ asset('img/femme-coeur.jpg') }}" width="300" height="500" alt="femme coeur" /></a>
+				<img src="{{ asset('img/femme-coeur.jpg') }}" width="300" height="500" alt="femme coeur" />
+				<a href="{{path('produit_categorie',{'id':2})}}">
 					<div class="content">
 					<div class="text">Femme</div>
 				</div>
 			</div>
+			</a>
 		</td>
 		<td width="50%" align="center">
 			<div class="example">
-			<a href="{{path('produit_categorie',{'id':1})}}"><img src="{{ asset('img/homme-neon.jpeg') }}" width="300" height="500" alt="homme neon" /></a>					<div class="content">
+			<img src="{{ asset('img/homme-neon.jpeg') }}" width="300" height="500" alt="homme neon" />
+			<a href="{{path('produit_categorie',{'id':1})}}">	
+			<div class="content">
 				<div class="text">Homme</div>
 				</div>
 			</div>
+			</a>
 		</td>
 	</tr>
 </table>
 
+	<h1 class="perfectionnez">NOUVEAUTES</h1>
+
+	{# https://flickity.metafizzy.co/  UTILISER CE CAROUSEL VOIR OPTION FREESCROL #}
 
 
-		
-
-	<h1 class="perfectionnez">PERFECTIONNEZ VOTRE STYLE</h1>
-<div class="pic-ctn">
-    <img src="img/perle.jpg" alt="" class="pic">
-    <img src="img/soleilune.png" alt="" class="pic">
-    <img src="img/tel.jpeg" alt="" class="pic">
-    <img src="img/thermos.png" alt="" class="pic">
-    <img src="img/UVV.png" alt="" class="pic">
+  <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true, "pageDots": false, "prevNextButtons": false, "autoPlay": 1500 }'>
+	
+	{% for article in articles %}
+		<div class="carousel-cell">
+			<img src="{{ asset('img/' ~ article.image) }}" alt="" height="600px" >
+			<div class="denomination-card">
+			<p>{{ article.denomination }}</p><br>
+			<p>{{ article.prix }} €</p>
+			</div>
+			
+		</div>
+	{% endfor %}
   </div>
-
 </main>
-
-
-{#                    
-                  
-					<div class="imgGalerie"><img class="img" src="img/neoon.jpeg" alt="tel"></div>
-					<div class="imgGalerie"><img class="img" src="img/homme-neon-rouge.jpg" alt="tel"></div>
- #}
-
 	{% endblock %}
 
 {% block javascript %}

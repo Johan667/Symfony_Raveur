@@ -131,6 +131,12 @@
     margin-bottom: 4rem;
 }
 
+.denomination-card{
+    font-weight: bold;
+    text-align: center;
+    padding: 2rem;
+}
+
 /* CSS PAGE LISTE DES PRODUITS */
 
 #choix-genre{
