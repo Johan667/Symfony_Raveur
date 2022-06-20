@@ -6,13 +6,31 @@
 
 <section>
   <article id="liste-tri">
-    <ul>
-      <li>Taille <i class="fa-solid fa-arrow-down"></i></li>
-      <li>Couleur <i class="fa-solid fa-arrow-down"></i></li>
-      <li>Prix <i class="fa-solid fa-arrow-down"></i></li>
-    </ul>
+
+<form action="" method="post" class="barre-tri">
+  <label for="taille">Taille</label>
+  <select name="taille" id="taille">
+  <option value="S">S</option>
+  <option value="M">M</option>
+  <option value="L">L</option>
+  <option value="XL">XL</option>
+    <option value="XXL">XXL</option>
+  </select>
+
+  <label for="couleur">Couleur</label>
+  <select name="couleur" id="couleur">
+  <option value="Noir">Noir </option>
+  <option value="Blanc">Blanc</option>
+  <option value="Rouge">Rouge</option>
+  <option value="Bleu">Bleu</option>
+  <option value="Vert">Vert</option>
+  </select>
+</form>
+
   </article>
 </section>
+
+<hr>
 
 <div class="cards-align">
   {% for article in categorie.articles %}

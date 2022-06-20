@@ -149,13 +149,9 @@
     text-align: center;
 }
 
-#liste-tri ul{
-    display: flex;
-    list-style: none;
-    gap:2rem; 
-    font-size: 24px;
+.barre-tri{
+  margin-top: 5rem;
 }
-
 
 /* Galerie */
 .pic-ctn {
@@ -287,4 +283,21 @@ font-size: 50px;
     grid-auto-rows: 0px;
     overflow-y: hidden;
 }
+
+
+/** VIDEO BACK GROUND **/
+
+#background-video {
+  height: 600px;
+  width: 1300px;
+  object-fit: cover;
+  margin-top: 5rem;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+
 
