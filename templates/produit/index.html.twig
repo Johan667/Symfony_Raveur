@@ -6,11 +6,20 @@
 
 <section>
    <div id="sorting-bar" class="container-fluid sorting-bar">
-        <form method="post">
+
+   <p>
+
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Affiner ma recherche
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+     <form method="post">
             <div class="form-group">
                 <label for="exampleFormControlSelect1">En stock :</label>
                 <select class="form-control" id="exampleFormControlSelect1">
-                    <option><?= $size ?></option>
+                    <option></option>
                     <option>Oui</option>
                     <option>Non</option>
                 </select>
@@ -53,28 +62,8 @@
 
             <button type="button" class="btn btn-success">Trier</button>
             <button type="button" class="btn btn-danger">Reset</button>
-
-
-{# <form action="" method="post" class="barre-tri">
-  <label for="taille">Taille</label>
-  <select name="taille" id="taille">
-  <option value="S">S</option>
-  <option value="M">M</option>
-  <option value="L">L</option>
-  <option value="XL">XL</option>
-    <option value="XXL">XXL</option>
-  </select>
-
-  <label for="couleur">Couleur</label>
-  <select name="couleur" id="couleur">
-  <option value="Noir">Noir </option>
-  <option value="Blanc">Blanc</option>
-  <option value="Rouge">Rouge</option>
-  <option value="Bleu">Bleu</option>
-  <option value="Vert">Vert</option>
-  </select>
-</form> #}
-
+  </div>
+</div>
   </article>
 </section>
 
