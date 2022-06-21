@@ -43,6 +43,113 @@
 
         </nav>
         {% block body %}{% endblock %}
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-cta pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="cta-text">
+                                <h4>Nous trouvez</h4>
+                                <span>79 Route des Romains 67200 Strasbourg</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fas fa-phone"></i>
+                            <div class="cta-text">
+                                <h4>Plus d'infos</h4>
+                                <span>07 66 56 53 96</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="far fa-envelope-open"></i>
+                            <div class="cta-text">
+                                <h4>Service Client</h4>
+                                <span>johan.kasri@icloud.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-content pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-logo">
+                                <a href="{{path('app_home')}}"><img src="{{ asset('img/logo.jpg') }}" class="img-fluid" alt="logo"></a>
+                            </div>
+                            <div class="footer-text">
+                                <p>Raveur à été concu en 2022 dans le cadre d'un examen de fin d'étude nous mettons tout en oeuvre pour vous offrir prochainement des articles de qualités à des prix défiant la concurrence</p>
+                            </div>
+                            <div class="footer-social-icon">
+                                <span>Suivez nous</span>
+                                <a href="#"><i class="fab fa-facebook-f facebook-bg"></i></a>
+                                <a href="#"><i class="fab fa-twitter twitter-bg"></i></a>
+                                <a href="#"><i class="fab fa-google-plus-g google-bg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h3>Liens Utiles</h3>
+                            </div>
+                            <ul>
+                                <li><a href="{{path('app_home')}}">Accueil</a></li>
+                                <li><a href="#">A propos</a></li>
+                                <li><a href="#">Histoire</a></li>
+                                <li><a href="www.johankasri.fr">Portfolio du développeur</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h3>Newsletter</h3>
+                            </div>
+                            <div class="footer-text mb-25">
+                                <p>N'oubliez pas de vous inscrire à notre newsletter !</p>
+                            </div>
+                            <div class="subscribe-form">
+                                <form action="#">
+                                    <input type="text" placeholder="Email">
+                                    <button><i class="fab fa-telegram-plane"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                        <div class="copyright-text">
+                            <p>Copyright &copy; 2022, Touts droits réservés <a href="http://www.raveur.fr">Raveur</a></p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                        <div class="footer-menu">
+                            <ul>
+                                <li><a href="#">Accueil</a></li>
+                                <li><a href="#">Termes & Conditions</a></li>
+                                <li><a href="#">Vie privée</a></li>
+                                <li><a href="#">Politique de confidentialité</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
