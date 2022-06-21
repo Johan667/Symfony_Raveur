@@ -5,9 +5,57 @@
 {% block body %}
 
 <section>
-  <article id="liste-tri">
+   <div id="sorting-bar" class="container-fluid sorting-bar">
+        <form method="post">
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">En stock :</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+                    <option><?= $size ?></option>
+                    <option>Oui</option>
+                    <option>Non</option>
+                </select>
+                <form method="post">
+                    <label for="exampleFormControlSelect2">Tarif :</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option>All</option>
+                        <option>Superieur</option>
+                        <option>Inferieur</option>
+                    </select>
+                    à <input type="text" class="form-control" id="valeurmug" placeholder=""> €
+                </form>
+                <form method="post">
+                    <label for="exampleFormControlSelect1">Taille :</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                        <option>XL</option>
+                        <option>XXL</option>
 
-<form action="" method="post" class="barre-tri">
+                    </select>
+                </form>
+                <form method="post">
+                    <label for="exampleFormControlSelect1">Nouveauté :</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option>All</option>
+                        <option>Oui</option>
+                        <option>Non</option>
+                    </select>
+                    <form method="post">
+                        <label for="exampleFormControlSelect1">Tendance :</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>All</option>
+                            <option>Oui</option>
+                            <option>Non</option>
+                        </select>
+                    </form>
+            </div>
+
+            <button type="button" class="btn btn-success">Trier</button>
+            <button type="button" class="btn btn-danger">Reset</button>
+
+
+{# <form action="" method="post" class="barre-tri">
   <label for="taille">Taille</label>
   <select name="taille" id="taille">
   <option value="S">S</option>
@@ -25,7 +73,7 @@
   <option value="Bleu">Bleu</option>
   <option value="Vert">Vert</option>
   </select>
-</form>
+</form> #}
 
   </article>
 </section>

@@ -139,6 +139,29 @@
 
 /* CSS PAGE LISTE DES PRODUITS */
 
+/* SORTING BAR  */
+.sorting-bar {
+  background: #f6f7f8;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding:25px 0;
+}
+.none {
+  display:none;
+}
+.mt-40 {
+  margin-top:40px;
+}
+
+.form-group
+{  display : inline }
+
+.form{
+  display : inline 
+
+}
+
+
 #choix-genre{
     margin-top: 5rem;
     display: flex;
@@ -296,8 +319,11 @@ font-size: 50px;
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: -1;
+  z-index: 0;
+  position:relative;
 }
+
+
 
 /** FOOTER **/
 
@@ -403,7 +429,7 @@ background: #ff5e14;
 }
 .footer-widget ul li {
 display: inline-block;
-float: left;
+float:left;
 width: 50%;
 margin-bottom: 12px;
 }
