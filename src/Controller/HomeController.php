@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
+use App\Form\SearchArticleType;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,8 +17,12 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="app_home")
      */
-    public function index(ManagerRegistry $doctrine, CategorieRepository $ca, ArticleRepository $ar): Response
+    public function index(ManagerRegistry $doctrine, CategorieRepository $ca, ArticleRepository $ar, Request $request): Response
     {
+
+        $formArticle = $this->createForm(SearchArticleType::class);
+        $search = $formArticle->handleRequest($request);
+
         // Je cherche dans le repository Categorie l'ensemble des informations
         $categories = $ca->findAll();
         $articles = $ar->findBy(["nouveau" => 1]);
@@ -24,7 +30,8 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'categories' => $categories,
-            'articles'=>$articles,
+            'articles'=> $articles,     
+            'formArticle'=> $formArticle->createView()    
         ]);
     }
 
@@ -37,4 +44,5 @@ class HomeController extends AbstractController
             'categorie' => $categorie,
         ]);
     }
+
 }

@@ -13,6 +13,8 @@ use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
+// https://www.youtube.com/watch?v=S9yhk4V1Fcg expliquer cette video
+
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  * @ORM\Table(name="article", indexes={@ORM\Index(columns={"denomination","description"}, flags={"fulltext"})})
