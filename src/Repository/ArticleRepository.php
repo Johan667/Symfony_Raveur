@@ -43,13 +43,19 @@ class ArticleRepository extends ServiceEntityRepository
      * Recherche des articles en fonction d'un formulaire
      * @return void
      */
-    public function search($mots){
-        $query = $this-createQueryBuilder('a');
+    public function search($mots = null, $categorie = null){
+        $query = $this->createQueryBuilder('a');
         if($mots != null){
-            $query->andWhere('MATCH_AGAINST(a.denomination, a.description) AGAINST (:mots boolean) > 0')
+            $query->where('MATCH_AGAINST(a.denomination, a.description) AGAINST (:mots boolean) > 0')
             ->setParameter('mots', $mots);
         }
+        if($categorie != null){
+            $query->leftJoin('a.categorie', 'c');
+            $query->andWhere('c.id = :id')
+            ->setParameter('id', $categorie);
 
+        }
+            return $query->getQuery()->getResult();
     }
 
 //    /**

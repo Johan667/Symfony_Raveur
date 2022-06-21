@@ -19,18 +19,27 @@ class HomeController extends AbstractController
      */
     public function index(ManagerRegistry $doctrine, CategorieRepository $ca, ArticleRepository $ar, Request $request): Response
     {
-
-        $formArticle = $this->createForm(SearchArticleType::class);
-        $search = $formArticle->handleRequest($request);
-
         // Je cherche dans le repository Categorie l'ensemble des informations
         $categories = $ca->findAll();
         $articles = $ar->findBy(["nouveau" => 1]);
 
+        $formArticle = $this->createForm(SearchArticleType::class);
+        $search = $formArticle->handleRequest($request);
+
+        if($formArticle->isSubmitted() && $formArticle->isValid()){
+            // On cherches les articles qui correspondent au mots clefs 
+            $articlesFound = $ar->search(
+                $search->get('mots')->getData(),
+                $search->get('categorie')->getData()
+        );
+            return $this->render('search/index.html.twig', [
+                'articlesFound'=>$articlesFound,
+            ]);
+        }
 
         return $this->render('home/index.html.twig', [
             'categories' => $categories,
-            'articles'=> $articles,     
+            'articles'=> $articles,    
             'formArticle'=> $formArticle->createView()    
         ]);
     }
