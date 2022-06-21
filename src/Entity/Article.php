@@ -2,14 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Taille;
+use App\Entity\Stocker;
+use App\Entity\Commande;
+use App\Entity\Categorie;
+use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\CollectionArticle;
+use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
- * @ORM\Table(name="article", indexes={@ORM\Index(columns={"denomination","description"} flags={"fulltext"})})
+ * @ORM\Table(name="article", indexes={@ORM\Index(columns={"denomination","description"}, flags={"fulltext"})})
  */
 class Article
 {
