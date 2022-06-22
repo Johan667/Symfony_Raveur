@@ -53,22 +53,16 @@ class PaiementController extends AbstractController
     public function checkout(SessionInterface $session){
 
         $panier = $session->get('panier', []);
-        var_dump($panier);die;
+      
 
         \Stripe\Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
         $session = \Stripe\Checkout\Session::create([
             'payment_method_types'=>['card'],
-            // 'line_items' => [[
-            //     # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-            //     'price' => 'price_1LDS0PAgDjI611jfZ58hvHP1',
-            //     'quantity' => 1,
-            // ]],
             'line_items' => [[
                 # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-                'price' => $panier['total'],
-                'quantity' => $panier['qte'],
+                'price' => 'price_1LDS0PAgDjI611jfZ58hvHP1',
+                'quantity' => 1,
             ]],
-
             'mode' => 'payment',
             'success_url' => $this->generateUrl('success', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'cancel_url' => $this->generateUrl('error', [], UrlGeneratorInterface::ABSOLUTE_URL),
