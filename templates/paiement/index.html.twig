@@ -5,53 +5,11 @@
 {% block body %}
 
 <section class="paiement">
-  <div class="container">
-    <div class="row">
-      <div class="col-6">
-        <nav class="navbar navbar-expand-lg navbar-light bg-white">
-
-            <ul class="navbar-nav">
-
-              <li class="nav-item">
-                 &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-cart-shopping"></i><br>
-                PANIER
-              </li>
-              <li class="nav-item">
-                &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-user"></i><br>
-                INFORMATIONS
-              </li>
-              <li class="nav-item">
-               &nbsp;&nbsp;&nbsp; <i class="fa-solid fa-truck-fast"></i><br>
-                LIVRAISON
-              </li>
-              <li class="nav-item">
-                &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-credit-card"></i><br>
-                PAIEMENT
-              </li>
-              <li class="nav-item">
-               &nbsp;&nbsp;&nbsp; <i class="fa-solid fa-face-grin-hearts"></i><br>
-                VALIDATION
-              </li>
-
-            </ul>
-       
-        </nav>
-      </div>
-
-    </div>
-  </div>
 
   <div class="container">
 
     <div class="row">
       <div class="col-6">
-        <div class="paiement-express">
-          <h2>PAIEMENT EXPRESS</h2>
-          <i class="fa-brands fa-apple-pay"></i>
-          <i class="fa-brands fa-amazon-pay"></i>
-          <i class="fa-brands fa-google-pay"></i>
-        </div><br>
-        <div class="trait"></div>
 
         <h2>INFORMATIONS DE CONTACT</h2>
 
@@ -59,11 +17,6 @@
 
         <div class="trait"></div>
 
-      <div class="form-pay">
-      <div id="card-element"></div>
-      <script src="https://js.stripe.com/v3"></script>
-      <div id="card-errors" role="alert"></div>
-      </div>
 
       </div>
 
@@ -83,11 +36,9 @@
 
           {% endfor %}
 
-          <form action="{{ path("payment_commande", { 'id':article.id } ) }}" method="post" id="formulaire-paiement">
-
-          </form>
           <br>
           <div class="trait"></div>
+
 
           CODE PROMO :<br>
           <input type="text"> <button type="button" class="btn btn-dark">GO</button><br>
@@ -102,105 +53,4 @@
 </section>
 {% endblock %}
 {% block javascripts %}
-<script>
-
-
-var stripeToken = pk_test_51L6amqAgDjI611jfkC9SsiE0w6baBhIa3nEGxdDXz8CnGKNDYdHeA1qGo0OfQjc0tVMeqhtnGcroaVENsiIn0Tqf00z6SbQv3y;
-
-
-
-var stripe = Stripe(stripeToken);
-var elements = stripe.elements();
-{# var commande = "{{ items }}"; #}
-var clientSecret = "{{ intentSecret }}";
-var cardholderName = "{{ app/user.nom }}";
-var cardholderEmail = "{{ app/user.email }}";
-
-  console.log('clientSecret', clientSecret);
-
-var styleCostum = {
-  base: {
-    fontSize: '16px',
-    color: '#25332d'
-  }
-}
-
-// Créer le formulaire à l'objet Stripe
-var card ) elements.create('card', {style: styleCostum });
-card.mount("card-elemnts");
-
-card.addEventListener('change', function(event)){
-  var displayError = document.getElementById('card-errors');
-
-  if(event.error){
-    displayError.textContent = event.error.message;
-  }else{
-    displayError.textContent = '';
-  }
-});
-
-var form = document.getElementById('formulaire-paiement');
-
-form.addEventListener('submit', function(event) => {
-event.preventDefault();
-
-
-
-stripe.handleCardPayment(
-  clientSecret,
-  card,
-  {
-    payment_method_data:{
-      billing_details: {
-        name: cardholderName,
-        email:cardholderEmail,
-      }
-    }
-  }
-).then((result) => {
-  if(result.error){
-    // Display error
-  }else if('paymentIntent' in result){
-    console.log(' Result paymentIntent', result);
-    stripeTokenHandler(result.paymentIntent);
-     console.log('Result paymentIntent : ',result.paymentIntent);
-  }
-} )
-});
-
-function stripeTokenHandler(intent){
-
-  var form = document.getElementById('formulaire-paiement');
-  var InputIntentId = document.createElement('input');
-  var InputIntentPayementMethod = document.createElement('input');
-  var InputIntentStatus = document.createElement('input');
-  var InputCommande = document.createElement('input');
-
-  InputIntentId.setAttribute('type','hidden');
-  InputIntentId.setAttribute('name', 'stripeIntentId');
-  InputIntentId.setAttribute('value', intent.id);
-
-  InputIntentPayementMethod.setAttribute('type','hidden');
-  InputIntentPayementMethod.setAttribute('name', 'stripeIntentPayementMethod');
-  InputIntentPayementMethod.setAttribute('value', intent.payment_method);
-
-  InputIntentStatus.setAttribute('type','hidden');
-  InputIntentStatus.setAttribute('name', 'InputIntentStatus');
-  InputIntentStatus.setAttribute('value', intent.status);
-
-  InputCommande.setAttribute('type','hidden');
-  InputCommande.setAttribute('name', 'InputCommande');
-  InputCommande.setAttribute('value', commande);
-
-  form.appendChild(InputIntentId);
-  form.appendChild(InputIntentPayementMethod);
-  form.appendChild(InputIntentStatus);
-  form.appendChild(InputCommande);
-  form.submit();
-
-
-}
-
-</script>
-
 {% endblock %}
