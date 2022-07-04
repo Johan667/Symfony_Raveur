@@ -2,10 +2,9 @@
 
 namespace App\Controller;
 
+use Stripe\Stripe;
 use App\Entity\Article;
-use App\Controller\ProduitController;
 use App\Repository\ArticleRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,7 +20,6 @@ class PaiementController extends AbstractController
     // Grace au service SessionInterface je rècupere une session ensuite je met en place un panier qui sera un tableau vide
     public function index(SessionInterface $session, ArticleRepository $articleRepository): Response
     {
-
         $panier = $session->get('panier', []);
         $panierWithData = [];
 
@@ -50,16 +48,15 @@ class PaiementController extends AbstractController
     /**
      * @Route("/create-checkout-session", name="checkout")
      */
-    public function checkout(SessionInterface $session){
-
+    public function checkout(SessionInterface $session)
+    {
         $panier = $session->get('panier', []);
-      
 
         \Stripe\Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
         $session = \Stripe\Checkout\Session::create([
-            'payment_method_types'=>['card'],
+            'payment_method_types' => ['card'],
             'line_items' => [[
-                # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
+                // Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
                 'price' => 'price_1LDS0PAgDjI611jfZ58hvHP1',
                 'quantity' => 1,
             ]],
@@ -72,24 +69,21 @@ class PaiementController extends AbstractController
         ]);
 
         return new JsonResponse(['id' => $session->id]);
-   
     }
 
     /**
      * @Route("/success", name="success")
      */
-    public function success(){
+    public function success()
+    {
         return $this->render('paiement/success.html.twig');
     }
 
-        /**
+    /**
      * @Route("/error", name="error")
      */
-    public function error(){
+    public function error()
+    {
         return $this->render('paiement/error.html.twig');
     }
-
-
-
-
 }

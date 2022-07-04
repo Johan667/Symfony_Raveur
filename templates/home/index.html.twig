@@ -64,19 +64,26 @@ RAVEUR
 <div class="container">
 <div class="row">
 <div class="col-7">
+	<a href="{{path('produit_categorie',{'id':7})}}">
 	<img src="{{ asset('img/accessoire.jpg') }}" width="700" height="800" alt="accessoires" />
+	</a>
 	</div>
 	<div class="col-5">
+	<a href="{{path('produit_categorie',{'id':5})}}">
 	<img src="{{ asset('img/chapeau.jpg') }}" width="400" height="400" alt="chapeaux" />
+	</a>
+	<a href="{{path('produit_categorie',{'id':4})}}">
 	<img src="{{ asset('img/bijoux6662322.jpg') }}" width="400" height="400" alt="bijoux" />
+	</a>
 	</div>
 	</div>
 	</div>
 
-
+<a href="{{ path('produit_categorie', { 'id': 6 }) }}">
 <video id="background-video" autoplay loop muted>
   <source src="{{ asset('img/festival.mp4') }}" type="video/mp4">
 </video>
+</a>
 
 <div class="content">
 <h1>COLLECTION FESTIVAL</h1>

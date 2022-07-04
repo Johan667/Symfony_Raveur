@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/path/to/flickity.css" media="screen">
     <script src="https://kit.fontawesome.com/3f1f47ed70.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
     {% endblock %}
 
 </head>
@@ -132,10 +133,10 @@
                         <div class="footer-menu">
                             <ul>
                                 <li><a href="#">Accueil</a></li>
-                                <li><a href="#">Termes & Conditions</a></li>
-                                <li><a href="#">Vie privée</a></li>
-                                <li><a href="#">Politique de confidentialité</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="{{path('cookie')}}">Cookies</a></li>
+                                <li><a href="{{path('mentions')}}">Mentions Légale</a></li>
+                                <li><a href="{{path('confidentialite')}}">Politique de confidentialité</a></li>
+                                <li><a href="{{path('cgv')}}">CGV</a></li>
                             </ul>
                         </div>
                     </div>
@@ -145,6 +146,65 @@
     </footer>
 
     {% block javascripts %}  
+             <script src="/tarteaucitron/tarteaucitron.js"></script>
+    <script type="text/javascript"> var tarteaucitronForceLanguage = "fr"; </script>
+<script type="text/javascript">
+tarteaucitron.init({
+  "privacyUrl": "confidentialite", /* URL page mentions */
+
+  "hashtag": "#tarteaucitron", /* Ouvrir le panneau du hashtag */
+  "cookieName": "tarteaucitron", /* Nom du cookie */
+
+  "orientation": "middle", /* Position banniere (top - bottom) */
+
+  "groupServices": false, /* Groupe les services par categories */
+                   
+  "showAlertSmall": false, /* Petite alerte en bas a droite */
+  "cookieslist": false, /* Montre la liste des cookies */
+                   
+  "closePopup": false, /* Fermer le popup */
+
+  "showIcon": true, /* Montrer l'icone cookie */
+  //"iconSrc": "", /* Optionnal: URL or base64 encoded image */
+  "iconPosition": "BottomLeft", /* BottomRight, BottomLeft, TopRight and TopLeft */
+
+  "adblocker": false, /* Detecte AD block */
+                   
+  "DenyAllCta" : true, /* Montre le bouton refuser tout */
+  "AcceptAllCta" : true, /* Montre accepter tout */
+  "highPrivacy": true, /* Desactive le contenu automatique */
+                   
+  "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+
+  "removeCredit": true, /* Retire le lien vers tarteaucitron */
+  "moreInfoLink": true, /* Lien Plus d'infos */
+
+  "useExternalCss": false, /* Si faut le CSS externe sera charger */
+  "useExternalJs": false, /* Si faut le JS externe sera charger */
+
+  //"cookieDomain": ".my-multisite-domaine.fr", /* Partage les cookies sur un multidomaine */
+                  
+  "readmoreLink": "", /* Changer le lien "lire plus"*/
+
+  "mandatory": true, /* Montre un message a propose des cookies "mandatory" */
+});
+tarteaucitron.services.mycustomservice = {
+  "key": "mycustomservice",
+  "type": "ads|analytic|api|comment|other|social|support|video",
+  "name": "MyCustomService",
+  "needConsent": true,
+  "cookies": ['cookie', 'cookie2'],
+  "readmoreLink": "/custom_read_more", // If you want to change readmore link
+  "js": function () {
+    "use strict";
+    // When user allow cookie
+  },
+  "fallback": function () {
+    "use strict";
+    // when use deny cookie
+  }
+};
+</script>
         <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
         <script src="/path/to/flickity.pkgd.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -179,6 +239,7 @@
                     });
             });
     </script>
+
 {% endblock %}
 </body>
 
