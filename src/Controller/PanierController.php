@@ -15,7 +15,7 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier", name="panier")
      */
-    public function index(SessionInterface $session, ArticleRepository $articleRepository): Response
+    public function index(SessionInterface $session, ArticleRepository $articleRepository, Request $request): Response
     {
         $amount = 0;
         $panier = $session->get('panier', []);
@@ -33,9 +33,9 @@ class PanierController extends AbstractController
             $totalItem = $item['article']->getPrix() * $item['quantite'];
             $amount += $totalItem;
         }
-
-        \Stripe\Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
-        $session = \Stripe\Checkout\Session::create([
+        if ($request->request->get('stripeToken')) {
+            \Stripe\Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
+            $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
                 'name' => 'Commande Raveur',
@@ -51,6 +51,9 @@ class PanierController extends AbstractController
             'enabled' => false,
             ],
         ]);
+        } else {
+            echo 'erreur';
+        }
 
         return $this->render('panier/index.html.twig', [
             'items' => $panierWithData,
