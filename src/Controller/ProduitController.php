@@ -45,40 +45,11 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    public function intentSecret(Article $article)
-    {
-        $intent = $this->stripeService->paymentIntent($article);
-
-        return $intent['client_secret'] ?? null;
-    }
-
-    public function stripe(array $stripeParameter, Article $article)
-    {
-        $ressource = null;
-        $data = $this->stripeService->stripe($stripeParameter, $article);
-        if ($data) {
-            $ressource = [
-                'stripeBrand' => $data['charges']['data'][0]['payment_method_details']['card']['brand'],
-                'stripeLast4' => $data['charges']['data'][0]['payment_method_details']['card']['last4'],
-                'stripeId' => $data['charges']['data'][0]['id'],
-                'stripeStatus' => $data['charges']['data'][0]['id']['status'],
-                'stripeToken' => $data['client_secret'],
-            ];
-        }
-
-        return $ressource;
-    }
-
     public function creation_commande(array $ressource, Article $article, User $user)
     {
         // une fois que le paiement est effectuer on injecte la commande en bdd
         $commande = new Commande();
 
-        $commande->setBrandStripe($ressource['stripeBrand']);
-        $commande->setLast4Stripe($ressource['stripeLast4']);
-        $commande->setIdChargeStripe($ressource['stripeId']);
-        $commande->setStripeToken($ressource['stripeToken']);
-        $commande->setStatusStripe($ressource['stripeStatus']);
         $commande->setDateCommande(new \Datetime());
         $this->em->persist($commande);
         $this->em->flush();
