@@ -19,7 +19,7 @@ class HomeController extends AbstractController
      */
     public function index(ManagerRegistry $doctrine, CategorieRepository $ca, ArticleRepository $ar, Request $request): Response
     {
-        // Je cherche dans le repository Categorie l'ensemble des informations
+        // Je cherche dans le repository Categorie pour afficher les articles
         $categories = $ca->findAll();
         $articles = $ar->findBy(['nouveau' => 1]);
 
