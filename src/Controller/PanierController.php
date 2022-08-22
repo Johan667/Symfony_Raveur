@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PanierController extends AbstractController
 {
@@ -16,6 +17,7 @@ class PanierController extends AbstractController
      */
     public function index(SessionInterface $session, ArticleRepository $articleRepository): Response
     {
+        $amount = 0;
         $panier = $session->get('panier', []);
         $panierWithData = [];
 
@@ -27,16 +29,32 @@ class PanierController extends AbstractController
             ];
         }
 
-        $total = 0;
-
         foreach ($panierWithData as $item) {
             $totalItem = $item['article']->getPrix() * $item['quantite'];
-            $total += $totalItem;
+            $amount += $totalItem;
         }
+
+        \Stripe\Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'name' => 'Commande Raveur',
+                // Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
+                'amount' => $amount * 100,
+                'currency' => 'eur',
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => $this->generateUrl('success', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'cancel_url' => $this->generateUrl('error', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'automatic_tax' => [
+            'enabled' => false,
+            ],
+        ]);
 
         return $this->render('panier/index.html.twig', [
             'items' => $panierWithData,
-            'total' => $total,
+            'amount' => $amount,
         ]);
     }
 
@@ -77,5 +95,21 @@ class PanierController extends AbstractController
         $session->set('panier', $panier);
 
         return $this->redirectToRoute('panier');
+    }
+
+    /**
+     * @Route("/success", name="success")
+     */
+    public function success()
+    {
+        return $this->render('paiement/success.html.twig');
+    }
+
+    /**
+     * @Route("/error", name="error")
+     */
+    public function error()
+    {
+        return $this->render('paiement/error.html.twig');
     }
 }

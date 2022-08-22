@@ -2,15 +2,14 @@
 
 namespace App\Controller;
 
-use Stripe\Stripe;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PaiementController extends AbstractController
 {
@@ -50,6 +49,7 @@ class PaiementController extends AbstractController
      */
     public function checkout(SessionInterface $session)
     {
+    
         $panier = $session->get('panier', []);
 
         \Stripe\Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
@@ -57,7 +57,7 @@ class PaiementController extends AbstractController
             'payment_method_types' => ['card'],
             'line_items' => [[
                 // Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-                'price' => 'price_1LDS0PAgDjI611jfZ58hvHP1',
+                'price' => $amount * 100,
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
