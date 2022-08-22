@@ -33,14 +33,13 @@ class PanierController extends AbstractController
             $totalItem = $item['article']->getPrix() * $item['quantite'];
             $amount += $totalItem;
         }
-        if ($request->request->get('stripeToken')) {
-            \Stripe\Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
-            $session = \Stripe\Checkout\Session::create([
+
+        \Stripe\Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
+        $intent = \Stripe\Charge::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
                 'name' => 'Commande Raveur',
-                // Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-                'amount' => $amount * 100,
+                'amount' => $amount * 100, // On multiplie par 100 le prix est en centime
                 'currency' => 'eur',
                 'quantity' => 1,
             ]],
@@ -51,9 +50,6 @@ class PanierController extends AbstractController
             'enabled' => false,
             ],
         ]);
-        } else {
-            echo 'erreur';
-        }
 
         return $this->render('panier/index.html.twig', [
             'items' => $panierWithData,
