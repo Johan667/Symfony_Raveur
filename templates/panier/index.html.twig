@@ -7,16 +7,17 @@
 
 <h1>PANIER</h1>
 
-
+<div class="container">
 <div class="row">
-    <div class="col-4">
-    </div>
-    <div class="col-8">
-    <h2>Votre Panier</h2>
-      <table class="table">
+    <div class="col-6">
+        <h2>Votre Panier</h2>
+
+         Vous avez déja un compte ? <b><a href="{{ path('app_login') }}"> Connexion</a> </b>
+        <table class="table">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Nom</th>
+                    <th scope="col">Image</th>
                     <th scope="col">Prix</th>
                     <th scope="col">Quantité</th>
                     <th scope="col">Total</th>
@@ -26,30 +27,66 @@
 
             <tbody>
                 {% for item in items %}
-              
+
                 <tr>
-                  <td>{{ item.article.denomination }}</td>
-                  <td>{{ item.article.prix }} €</td>
-                  <td>{{ item.quantite }}</td>
-                  <td>{{ item.article.prix * item.quantite}} €</td>
-                  <td> <a href="{{ path('panier_supprimer', {'id': item.article.id})}}" class="btn btn-danger sm">
-                  <i class="fas fa-trash"></i>
-                  </a>
-                  </td>
+                    <td>{{ item.article.denomination }}</td>
+                    <td><div class="image-recap">
+            <img src="{{ asset('img/' ~ item.article.image) }}" class="card-img-top"
+              alt="{{ item.article.denomination }}">
+          </div></td>
+                    <td>{{ item.article.prix }} €</td>
+                    <td>{{ item.quantite }}</td>
+                    <td>{{ item.article.prix * item.quantite}} €</td>
+                    <td> <a href="{{ path('panier_supprimer', {'id': item.article.id})}}" class="btn btn-danger sm">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
                 </tr>
-                  {% endfor %}
+                {% endfor %}
             </tbody>
             <tfoot>
-            <tr>
-            <td colspan="3" class="text-right"><b>TOTAL</b> :</td>
-            <td> <b>{{ total }}</b> €</td>
-            <td></td>
-            </tr>
+                <tr>
+                    <td colspan="3" class="text-right"><b>TOTAL</b> :</td>
+                    <td> <b>{{ total }}</b> €</td>
+                    <td></td>
+                </tr>
             </tfoot>
         </table>
-        <button id="checkout-button" class="btn btn-primary">Valider mon panier</button>
+        </div>
+            <div class="col-4">
+                <form method="post" id="payment-form">
+                    <div>
+                        <p>Adresse de facturation</p>
+                        <input type="text" name="adresseFactu" placeholder="Adresse" class="input-full">
+                        <input type="text" name="villeFactu" placeholder="Ville" class="input-full">
+                        <input type="text" name="cpFactu" placeholder="CP" class="input-full">
+                    </div>
+                    <div>
+                        <p>Adresse de livraison</p>
+                        <input type="text" name="adresseLivraison" placeholder="Adresse" class="input-full">
+                        <input type="text" name="villeLivraison" placeholder="Ville" class="input-full">
+                        <input type="text" name="cpLivraison" placeholder="CP" class="input-full">
 
+                    </div>
+                    <div>
+                        <label>Informations de payements</label>
+                        <div id="card-element"></div>
+                        <div id="card-errors" role="alert"></div>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('payment') }}">
+                    <button id="checkout-button" class="btn btn-primary">Payer</button>
+                </form>
+            </div>
+
+
+        </div>
     </div>
 </div>
+</div>
 
+
+{% endblock %}
+{% block javascripts %}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="/js/stripeCustom.js"></script>
 {% endblock %}
