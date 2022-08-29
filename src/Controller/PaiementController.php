@@ -49,8 +49,13 @@ class PaiementController extends AbstractController
      */
     public function checkout(SessionInterface $session)
     {
-    
+        $amount = 0;
         $panier = $session->get('panier', []);
+        $panierWithData = [];
+        foreach ($panierWithData as $item) {
+            $totalItem = $item['article']->getPrix() * $item['quantite'];
+            $amount += $totalItem;
+        }
 
         \Stripe\Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
         $session = \Stripe\Checkout\Session::create([

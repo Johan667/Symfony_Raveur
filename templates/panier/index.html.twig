@@ -7,7 +7,7 @@
 {% block body %}
 	<div class="container">
 		<div class="row">
-			<div class="col-6">
+
 				<h2>Votre Panier</h2>
 				<table class="table">
 					<thead class="thead-dark">
@@ -56,7 +56,7 @@
 						</tr>
 					</tfoot>
 				</table>
-			</div>
+	
 			<div class="col-6">
 				<form method="post" id="payment-form">
 					Vous avez déja un compte ?
@@ -64,29 +64,8 @@
 						<a href="{{ path('app_login') }}">
 							Connexion</a>
 					</b>
-					<div>
-						<p>Adresse de facturation</p>
-						<input type="text" name="adresseFactu" placeholder="Adresse" class="input-full">
-						<input type="text" name="villeFactu" placeholder="Ville" class="input-full">
-						<input type="text" name="cpFactu" placeholder="CP" class="input-full">
-					</div>
-					<div>
-						<p>Adresse de livraison</p>
-						<input type="text" name="adresseLivraison" placeholder="Adresse" class="input-full">
-						<input type="text" name="villeLivraison" placeholder="Ville" class="input-full">
-						<input type="text" name="cpLivraison" placeholder="CP" class="input-full">
-
-					</div>
-					<div>
-						<label>Informations de payements</label>
-						<div id="card-element"></div>
-						<div id="card-errors" role="alert"></div>
-					</div>
-					{# <input type="hidden" name="_csrf_token" value="{{ csrf_token('payment') }}"> #}
-					<button type="submit" value="Submit">Payer</button>
-				</form>
 			</div>
-
+ <p class="center"><a class="btn-action mya" href="{{ path("checkout") }}">Acheter</a></p>
 
 		</div>
 	</div>

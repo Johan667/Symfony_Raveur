@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PanierController extends AbstractController
 {
@@ -33,23 +32,6 @@ class PanierController extends AbstractController
             $totalItem = $item['article']->getPrix() * $item['quantite'];
             $amount += $totalItem;
         }
-
-        \Stripe\Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
-        $intent = \Stripe\Charge::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'name' => 'Commande Raveur',
-                'amount' => $amount * 100, // On multiplie par 100 le prix est en centime
-                'currency' => 'eur',
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => $this->generateUrl('success', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            'cancel_url' => $this->generateUrl('error', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            'automatic_tax' => [
-            'enabled' => false,
-            ],
-        ]);
 
         return $this->render('panier/index.html.twig', [
             'items' => $panierWithData,
