@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+
+
+<div class="container-compte">
+    <h1>Bonjour {{ app.user.prenom }}! ✅</h1>
+
+        <h2><strong>Modifier les informations personelles</strong></h2>
+        {{ form_start(form) }}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.prenom) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.telephone) }}
+                {{ form_row(form.societe) }}
+        <h2><strong>Modifier l'adresse de livraison</strong></h2>
+            {{ form_row(form.adresse) }}
+            {{ form_row(form.ville) }}
+            {{ form_row(form.codePostal) }}
+            {{ form_row(form.pays) }}
+        {{ form_end(form) }}
+
+
+<h2> Modifier mot de passe </h2>
+        {{ form_start(password) }}
+            {{ form_row(password.oldPassword) }}
+            {{ form_row(password.newPassword) }}
+            {{ form_row(password.reset) }}
+        {{ form_end(password) }}
+
+<h2> Désactiver mon compte </h2>
+<a href="">Cliquez ici</a>
+
+</div>
+{% endblock %}

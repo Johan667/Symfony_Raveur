@@ -61,7 +61,6 @@ class PaiementController extends AbstractController
         $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
-                // Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
                 'price' => $amount * 100,
                 'quantity' => 1,
             ]],
@@ -74,6 +73,10 @@ class PaiementController extends AbstractController
         ]);
 
         return new JsonResponse(['id' => $session->id]);
+
+        return $this->render('paiement/order.html.twig', [
+            'panier' => $panier,
+        ]);
     }
 
     /**
