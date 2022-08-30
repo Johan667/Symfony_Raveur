@@ -30,13 +30,6 @@ class UserType extends AbstractType
                 'max' => 30,
             ]),
         ]])
-        ->add('societe', TextType::class, ['label' => 'societe : ', 'attr' => ['class' => 'input-full'], 'constraints' => [
-            new Length([
-                'min' => 2,
-                'minMessage' => 'La société doit posséder 2 caractère minimum',
-                'max' => 100,
-            ]),
-        ]])
         ->add('telephone', TextType::class, ['label' => 'Telephone :', 'attr' => ['class' => 'input-full'], 'constraints' => [
                 new Length([
                     'min' => 10,

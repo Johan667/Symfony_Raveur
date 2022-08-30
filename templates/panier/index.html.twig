@@ -5,6 +5,7 @@
 
 
 {% block body %}
+	{% if app.user  %}
 	<div class="container">
 		<div class="row">
 
@@ -52,24 +53,27 @@
 							<td>
 								<b>{{ amount }}</b>
 								€</td>
-							<td></td>
+							<td><p class="center"><a class="btn-action mya" href="{{ path("checkout") }}">Acheter</a></p></td>
 						</tr>
 					</tfoot>
 				</table>
-	
+	 			
 			<div class="col-6">
+		{% else %}
 				<form method="post" id="payment-form">
 					Vous avez déja un compte ?
 					<b>
 						<a href="{{ path('app_login') }}">
 							Connexion</a>
 					</b>
+			{% endif %}
 			</div>
- <p class="center"><a class="btn-action mya" href="{{ path("checkout") }}">Acheter</a></p>
 
 		</div>
 	</div>
-</div></div>{% endblock %}
+</div>
+
+{% endblock %}
 
 {% block javascripts %}
 <script src="https://js.stripe.com/v3/">

@@ -9,6 +9,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -28,8 +29,7 @@ class UserController extends AbstractController
             $user->setNom($form->get('nom')->getData())
                  ->setPrenom($form->get('prenom')->getData())
                  ->setEmail($form->get('email')->getData())
-                 ->setTelephone($form->get('telephone')->getData())
-                 ->setSociete($form->get('societe')->getData());
+                 ->setTelephone($form->get('telephone')->getData());
             $doctrine->getManager()->flush(); // on applique les modification
             $this->addFlash('sucess', 'Vos informations ont bien été mis a jour !');
 
@@ -51,5 +51,30 @@ class UserController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
             'password' => $password->createView(), ]);
+    }
+
+    /**
+     * @Route("/account/delete", name="delete_account")
+     */
+    public function deleteAcount(ManagerRegistry $doctrine)
+    {
+        $user = $this->getUser();
+        $em = $doctrine->getManager();
+        // $commandes = $user->getCommandes();
+        // $nbCommande = count($commandes);
+
+        // if ($nbCommande === 1) {
+        //     $em->remove($commandes[0]);
+        // } else {
+        //     $em->remove($commandes[$nbCommande - 1]);
+        // }
+
+        $newSession = new Session();
+        $newSession->invalidate();
+
+        $em->remove($user);
+        $em->flush();
+
+        return $this->redirectToRoute('app_home');
     }
 }
