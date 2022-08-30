@@ -32,10 +32,15 @@
                 <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 7 }) }}">ACCESSOIRES</a></li>
 
                 <li class="btnNav"><a href="{{ path('panier') }}"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                {% if app.user%}
                 <li class="btnNav"><a href="{{ path('app_user') }}"><i class="fa-solid fa-user"></i></a></li>
+                {% endif %}
                 <li class="btnNav"><a href="{{ path('app_login') }}"><i class="fa-solid fa-arrow-right-to-bracket"></i></a></li>
                 {% if is_granted("ROLE_ADMIN") %}
                 <li class="btnNav"><a href="{{ path('admin') }}">ADMIN</a></li>
+                {% endif %}
+                {% if app.user%}
+                <li class="btnNav"><a href="{{ path('app_logout') }}"><i class="fa-solid fa-power-off"></i></a></li>
                 {% endif %}
             </ul>
 

@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Categorie;
 use App\Form\SearchArticleType;
+use App\Form\TriType;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
@@ -48,10 +50,28 @@ class HomeController extends AbstractController
     /**
      * @Route("/produit/categorie/{id}", name="produit_categorie")
      */
-    public function AfficherCategorie(ManagerRegistry $doctrine, Categorie $categorie): Response
+    public function AfficherCategorie(ManagerRegistry $doctrine, Categorie $categorie, Session $session, Request $request): Response
     {
+        $TriForm = $this->createForm(TriType::class);
+
+        // STOCKER le resultat dans la session ou créer une session
+        if (!$session->get('filter')) {
+            $filterSession = [
+                        'categorie' => null,
+                        'nouveau' => null,
+                        'tendance' => null,
+                        'prixUn' => null,
+                        'prixDeux' => null,
+                    ];
+            $session->set('filter', $filterSession);
+        } else {
+            $filterSession = $session->get('filter');
+        }
+        $TriForm->handleRequest($request);
+
         return $this->render('produit/index.html.twig', [
             'categorie' => $categorie,
+            'TriForm' => $TriForm->createView(),
         ]);
     }
 }

@@ -40,22 +40,48 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * Recherche des articles en fonction d'un formulaire
+     * Recherche des articles en fonction d'un formulaire.
+     *
      * @return void
      */
-    public function search($mots = null, $categorie = null){
+    public function search($mots = null, $categorie = null)
+    {
         $query = $this->createQueryBuilder('a');
-        if($mots != null){
+        if ($mots != null) {
             $query->where('MATCH_AGAINST(a.denomination, a.description) AGAINST (:mots boolean) > 0')
             ->setParameter('mots', $mots);
         }
-        if($categorie != null){
+        if ($categorie != null) {
             $query->leftJoin('a.categorie', 'c');
             $query->andWhere('c.id = :id')
             ->setParameter('id', $categorie);
-
         }
-            return $query->getQuery()->getResult();
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function TriBar(bool $nouveau = null, float $prixUn = null, float $prixDeux = null, int $limit = null, int $offset = null)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('p')
+            ->from('App\Entity\Produit', 'p')
+            ->where('p.nouveau = true');
+
+        if ($nouveau === true) {
+            $qb->andWhere('p.nouveau > 0');
+        }
+        if ($prixUn !== null) {
+            $qb->andWhere('p.prix > :prix')
+            ->setParameter(':prix', $prixUn);
+        }
+        if ($prixDeux !== null) {
+            $qb->andWhere('p.prix < :prix')
+            ->setParameter(':prix', $prixDeux);
+        }
+
+        $query = $qb->getQuery();
+
+        return $query->execute();
     }
 
 //    /**
