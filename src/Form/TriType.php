@@ -32,10 +32,10 @@ class TriType extends AbstractType
                 'required' => false,
                 'label' => 'Nouveau :',
             ])
-            // ->add('tendance', CheckboxType::class, [
-            //     'required' => false,
-            //     'label' => 'Tendance :',
-            // ])
+            ->add('tendance', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Tendance :',
+            ])
             // ->add('collectionArticle')
             ->add('categorie', EntityType::class, [
                 'required' => false,

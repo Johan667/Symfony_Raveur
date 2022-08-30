@@ -60,14 +60,21 @@ class HomeController extends AbstractController
                         'categorie' => null,
                         'nouveau' => null,
                         'tendance' => null,
-                        'prixUn' => null,
-                        'prixDeux' => null,
                     ];
             $session->set('filter', $filterSession);
         } else {
             $filterSession = $session->get('filter');
         }
         $TriForm->handleRequest($request);
+        if ($TriForm->isSubmitted() && $TriForm->isValid()) { // si l'utilisateur decide de trier les produits
+            foreach ($filterSession as $key => $value) { // on gere le tableau de filtre en lui inserant les données demandé
+                if ($TriForm->get($key)->getData() != null || $TriForm->get($key)->getData() === false) {
+                    $filterSession[$key] = $TriForm->get($key)->getData(); // si il ya une donne on la rentre
+                } else {
+                    $filterSession[$key] = $session->set($key, null); // sinon on met la donné a null
+                }
+            }
+        }
 
         return $this->render('produit/index.html.twig', [
             'categorie' => $categorie,
