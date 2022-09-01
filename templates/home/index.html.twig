@@ -51,7 +51,8 @@ RAVEUR - Accueil
 
 		{% for article in articles %}
 		<div class="carousel-cell">
-			<a href="{{ path('produit_detail', {'id' : article.id}) }}"><img src="{{ asset('img/' ~ article.image) }}" alt="{{ article.denomination }}" height="500px"></a>
+			<a href="{{ path('produit_detail', {'id' : article.id}) }}"><img src="{{ asset('img/' ~ article.image) }}"
+					alt="{{ article.denomination }}" height="500px"></a>
 			<div class="denomination-card">
 				<p>{{ article.denomination }}</p><br>
 				<p>{{ article.prix }} €</p>
@@ -63,45 +64,47 @@ RAVEUR - Accueil
 
 	<div class="container-turbo">
 		<div class="row">
-				<a href="{{path('produit_categorie',{'id':4})}}">
-					BIJOUX
-				</a>
-				<a href="{{path('produit_categorie',{'id':7})}}">
-					ACCESSOIRES
-				</a>
-				<a href="{{path('produit_categorie',{'id':5})}}">
-					CHAPEAUX
-				</a> 
+			<a href="{{path('produit_categorie',{'id':4})}}">
+				BIJOUX
+			</a>
+			<a href="{{path('produit_categorie',{'id':7})}}">
+				ACCESSOIRES
+			</a>
+			<a href="{{path('produit_categorie',{'id':5})}}">
+				CHAPEAUX
+			</a>
+		</div>
+	</div>
+	<div class="contenair-fesival">
+		<div class="row">
+			<div class="col-6">
+				<div class="textefes"><a href="{{ path('produit_categorie', { 'id': 6 }) }}">DECOUVREZ LES ESSENTIELLES
+						DE FESTIVAL</a></div>
+			</div>
+			<div class="col-6">
+				<div class="festival">
+
+					<a href="{{ path('produit_categorie', { 'id': 6 }) }}">
+						<img src="{{ asset('img/festivalimg.jpg') }}" width="500" height="500" alt="festival" />
+					</a>
+				</div>
 			</div>
 		</div>
-<div class="contenair-fesival">
-<div class="row">
-<div class="col-6">
-<div class="textefes"><a href="{{ path('produit_categorie', { 'id': 6 }) }}">DECOUVREZ LES ESSENTIELLES DE FESTIVAL</a></div>
-</div>
-<div class="col-6">
-<div class="festival">
-
-	<a href="{{ path('produit_categorie', { 'id': 6 }) }}">
-		<img src="{{ asset('img/festivalimg.jpg') }}" width="500" height="500" alt="festival" />
-	</a>
-</div>
-</div>
-</div>
-</div>
+	</div>
 
 </main>
 {% endblock %}
 
 {% block javascript %}
 <script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
-<script>const clearInput = () => {
-  const input = document.getElementsByTagName("input")[0];
-  input.value = "";
-}
+<script>
+	const clearInput = () => {
+		const input = document.getElementsByTagName("input")[0];
+		input.value = "";
+	}
 
-const clearBtn = document.getElementById("clear-btn");
-clearBtn.addEventListener("click", clearInput);
+	const clearBtn = document.getElementById("clear-btn");
+	clearBtn.addEventListener("click", clearInput);
 </script>
 
 {% endblock %}

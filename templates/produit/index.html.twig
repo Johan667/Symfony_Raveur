@@ -26,17 +26,15 @@
 		</article>
 	</section>
 
-	<hr>
-
 	<div class="cards-align">
 		{% for article in categorie.articles %}
 
 			<div class="card" style="width: 18rem;">
 				<img src="{{ asset('img/' ~ article.image) }}" class="card-img-top" alt="{{ article }}">
 				<div class="card-body">
-					<h5 class="card-title">{{ article }}</h5>
-					<p class="card-text">{{ article.prix }}€<br>
-						<a href="{{ path('produit_detail', {'id' : article.id}) }}" class="btn btn-primary">Acheter</a>
+					<h5 class="card-title">{{ article }}<br></h5>
+					<p class="card-text">{{ article.prix }}€<br><br>
+						<a href="{{ path('produit_detail', {'id' : article.id}) }}" class="acheter">Acheter</a>
 					</p>
 				</div>
 			</div>
