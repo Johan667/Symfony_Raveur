@@ -303,7 +303,6 @@
 
 .prod-sim{
     padding:5rem;
-    margin-top: 5rem;
     text-align: center;
 }
 
@@ -316,6 +315,36 @@
     max-height: 600px;
 }
 
+.bold{
+  font-weight: bold;
+  color:grey;
+}
+.detail-prod{
+  width: 600px;
+}
+.detail-prod form{
+padding:1rem;
+font-size: larger;
+}
+.titre-article{
+  font-size: 50px;
+  font-weight: bold;
+}
+.prix-article{
+  font-size: 30px;
+  font-weight: bold;
+
+}
+.description-article{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.btn-acheter{
+  color:white;
+  background-color: #000;
+  padding: 0.5rem;
+}
 /* Etapes Paiement */
 
 .etapes-paiement{
@@ -392,7 +421,7 @@ font-size: 50px;
 
 .site-footer
 {
-  background-color:#26272b;
+  background-color:#000000;
   padding:45px 0 20px;
   font-size:15px;
   line-height:24px;

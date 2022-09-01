@@ -5,55 +5,54 @@
 {% block body %}
 
 <section class="fiche-produit">
-        <div class="row">
-            <div class="col-6">
-                <div class="image-principale">
-                    <img src="{{ asset('img/' ~ article.image) }}" class="card-img-top" alt="{{ article }}">
-                </div>
-            </div>
-        
+    <div class="row">
         <div class="col-6">
-        <h1>{{ article }}</h1>
-        {{ article.prix }} €<br>
-        Couleur - {{ article.couleur }}<br>
-        Taille - {{ article.taille }}<br>
-        {#} ICI DEFINIR LES BOUTON DE SELECTION DE TAILLE AFFICHER UNIQUEMENT LES DISPONIBLE {#}
-        <form action="{{ path('panier_ajouter', {'id' : article.id}) }}" method="post" >
-        <select name="quantite" id="qte">
-        {% for i in 1..100 %}
-        <option value="{{ i }}"> {{ i }} </option> 
-        {% endfor %}
-       
-        </select>
-        <button class="btn btn-primary">Ajouter au panier</button>
-       </form>
+            <div class="image-principale">
+                <img src="{{ asset('img/' ~ article.image) }}" class="card-img-top" alt="{{ article }}">
+            </div>
+        </div>
+        <div class="detail-prod">
+            <div class="col-6">
+                <h1 class="titre-article">{{ article }}</h1>
+                <div class="prix-article">{{ article.prix }} €</div><br>
+                <div class="bold">Couleur -</div> {{ article.couleur }}<br>
+                <div class="bold">Taille -</div>{{ article.taille }}<br>
+                {#} ICI DEFINIR LES BOUTON DE SELECTION DE TAILLE AFFICHER UNIQUEMENT LES DISPONIBLE {#}
+                <form action="{{ path('panier_ajouter', {'id' : article.id}) }}" method="post">
+                    <select name="quantite" id="qte">
+                        {% for i in 1..100 %}
+                        <option value="{{ i }}"> {{ i }} </option>
+                        {% endfor %}
+                    </select>
+                    <button class="btn-acheter">Ajouter au panier</button>
+                </form>
 
 
-        <br><h2>DESCRIPTION</h2>
-        {{ article.description }}
+                <br>
+                <h2 class="description-article">DESCRIPTION</h2>
+                {{ article.description }}
+            </div>
         </div>
     </div>
 </section>
+<br>
 <section>
-        <div class="row">
-            <div class="col-9">
-<h2 class="prod-sim">PRODUIT SIMILAIRES</h2>
-<div class="produits-tendance">
-  <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true, "pageDots": false, "prevNextButtons": false, "autoPlay": 3000 }'>
-	
-	{% for article in articles %}
-		<div class="carousel-cell">
-			<img src="{{ asset('img/' ~ article.image) }}" alt="" height="300px" >
-			<div class="denomination-card">
-			<p>{{ article.denomination }}</p><br>
-			<p>{{ article.prix }} €</p>
-			</div>
-			
-		</div>
-	{% endfor %}
-  </div>
-</div>
-</div>
-</div>
-<section>
-{% endblock %}
+            <h2 class="prod-sim">PRODUIT SIMILAIRES</h2>
+            <div class="produits-tendance">
+                <div class="main-carousel"
+                    data-flickity='{ "cellAlign": "left", "contain": true, "pageDots": false, "prevNextButtons": false, "autoPlay": 3000 }'>
+
+                    {% for article in articles %}
+                    <div class="carousel-cell">
+                        <a href="{{ path('produit_detail', {'id' : article.id}) }}" class="acheter"><img src="{{ asset('img/' ~ article.image) }}" alt="" height="300px"></a>
+                        <div class="denomination-card">
+                            <p>{{ article.denomination }}</p><br>
+                            <p>{{ article.prix }} €</p>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+                </div>
+    </div>
+    <section>
+        {% endblock %}
