@@ -1,103 +1,107 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-RAVEUR
+RAVEUR - Accueil
 {% endblock %}
 
 {% block body %}
 
 <main>
-	
-<div class="contenant">
-  <img id="imgaccueil" src="img/accueil.jpeg" alt="accueil-raveur">
-  <div class="texte_centre"><a href="{{ path('produit_categorie', { 'id': 3 }) }}">COLLECTION NEON</a></div>
-</div>
+	<div class="contenant">
+		<video id="background-video" preload="auto" autoplay loop muted>
+			<source src="{{ asset('img/neon.mp4') }}" type="video/mp4">
+		</video>
+		<div class="texte_centre"><a href="{{ path('produit_categorie', { 'id': 3 }) }}">COLLECTION NEON</a></div>
+	</div>
 
-<div class="searchbar">
-{{ form(formArticle)}}
-</div>
 
-<table border="0" width="100%">
-	<tr>		
-		<td width="50%" align="center">
-			<div class="example">
-				<img src="{{ asset('img/femme-coeur.jpg') }}" width="300" height="500" alt="femme coeur" />
-				<a href="{{path('produit_categorie',{'id':2})}}">
-					<div class="content">
-					<div class="text">Femme</div>
+	<div class="searchbar">
+		{{ form(formArticle)}}
+	</div>
+
+	<table border="0" width="100%">
+		<tr>
+			<td width="50%" align="center">
+				<div class="example">
+					<img src="{{ asset('img/femme-coeur.jpg') }}" width="300" height="500" alt="femme coeur" />
+					<a href="{{path('produit_categorie',{'id':2})}}">
+						<div class="content">
+							<div class="text">Femme</div>
+						</div>
 				</div>
-			</div>
-			</a>
-		</td>
-		<td width="50%" align="center">
-			<div class="example">
-			<img src="{{ asset('img/homme-neon.jpeg') }}" width="300" height="500" alt="homme neon" />
-			<a href="{{path('produit_categorie',{'id':1})}}">	
-			<div class="content">
-				<div class="text">Homme</div>
+				</a>
+			</td>
+			<td width="50%" align="center">
+				<div class="example">
+					<img src="{{ asset('img/homme-neon.jpeg') }}" width="300" height="500" alt="homme neon" />
+					<a href="{{path('produit_categorie',{'id':1})}}">
+						<div class="content">
+							<div class="text">Homme</div>
+						</div>
 				</div>
-			</div>
-			</a>
-		</td>
-	</tr>
-</table>
+				</a>
+			</td>
+		</tr>
+	</table>
 
 	<h1 class="perfectionnez">NOUVEAUTES</h1>
 
-	{# https://flickity.metafizzy.co/  UTILISER CE CAROUSEL VOIR OPTION FREESCROL #}
+	<div class="main-carousel"
+		data-flickity='{ "cellAlign": "left", "contain": true, "pageDots": false, "prevNextButtons": false, "autoPlay": 1500 }'>
 
-
-  <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true, "pageDots": false, "prevNextButtons": false, "autoPlay": 1500 }'>
-	
-	{% for article in articles %}
+		{% for article in articles %}
 		<div class="carousel-cell">
-			<img src="{{ asset('img/' ~ article.image) }}" alt="" height="600px" >
+			<a href="{{ path('produit_detail', {'id' : article.id}) }}"><img src="{{ asset('img/' ~ article.image) }}" alt="{{ article.denomination }}" height="500px"></a>
 			<div class="denomination-card">
-			<p>{{ article.denomination }}</p><br>
-			<p>{{ article.prix }} €</p>
+				<p>{{ article.denomination }}</p><br>
+				<p>{{ article.prix }} €</p>
 			</div>
-			
+
 		</div>
-	{% endfor %}
-  </div>
+		{% endfor %}
+	</div>
 
-<div class="container">
+	<div class="container-turbo">
+		<div class="row">
+				<a href="{{path('produit_categorie',{'id':4})}}">
+					BIJOUX
+				</a>
+				<a href="{{path('produit_categorie',{'id':7})}}">
+					ACCESSOIRES
+				</a>
+				<a href="{{path('produit_categorie',{'id':5})}}">
+					CHAPEAUX
+				</a> 
+			</div>
+		</div>
+<div class="contenair-fesival">
 <div class="row">
-<div class="col-7">
-	<a href="{{path('produit_categorie',{'id':7})}}">
-	<img src="{{ asset('img/accessoire.jpg') }}" width="700" height="800" alt="accessoires" />
-	</a>
-	</div>
-	<div class="col-5">
-	<a href="{{path('produit_categorie',{'id':5})}}">
-	<img src="{{ asset('img/chapeau.jpg') }}" width="400" height="400" alt="chapeaux" />
-	</a>
-	<a href="{{path('produit_categorie',{'id':4})}}">
-	<img src="{{ asset('img/bijoux6662322.jpg') }}" width="400" height="400" alt="bijoux" />
-	</a>
-	</div>
-	</div>
-	</div>
+<div class="col-6">
+<div class="textefes"><a href="{{ path('produit_categorie', { 'id': 6 }) }}">DECOUVREZ LES ESSENTIELLES DE FESTIVAL</a></div>
+</div>
+<div class="col-6">
+<div class="festival">
 
-<a href="{{ path('produit_categorie', { 'id': 6 }) }}">
-<video id="background-video" autoplay loop muted>
-  <source src="{{ asset('img/festival.mp4') }}" type="video/mp4">
-</video>
-</a>
-
-<div class="content">
-<h1>COLLECTION FESTIVAL</h1>
-<h2>Découvrir</h2>
-<button id="btnVideo" onclick="playAndPause()">II</button>
+	<a href="{{ path('produit_categorie', { 'id': 6 }) }}">
+		<img src="{{ asset('img/festivalimg.jpg') }}" width="500" height="500" alt="festival" />
+	</a>
+</div>
+</div>
+</div>
 </div>
 
-
 </main>
-	{% endblock %}
+{% endblock %}
 
 {% block javascript %}
-<script>
-var video = document.getElementById("background-video");
-var btn = document.getElementById("btnVideo");
+<script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
+<script>const clearInput = () => {
+  const input = document.getElementsByTagName("input")[0];
+  input.value = "";
+}
+
+const clearBtn = document.getElementById("clear-btn");
+clearBtn.addEventListener("click", clearInput);
 </script>
+
 {% endblock %}

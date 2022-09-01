@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Votre Panier
+{% block title %}RAVEUR - Panier
 {% endblock %}
 
 
@@ -48,11 +48,9 @@
 					<tfoot>
 						<tr>
 							<td colspan="3" class="text-right">
-								<b>TOTAL</b>
-								:</td>
-							<td>
+								<b>TOTAL</b>:</td>															
 								<b>{{ amount }}</b>
-								€</td>
+								<td>€</td>
 							<td><p class="center"><a class="btn-action mya" href="{{ path("checkout") }}">Acheter</a></p></td>
 						</tr>
 					</tfoot>
@@ -63,12 +61,10 @@
 				<form method="post" id="payment-form">
 					Vous avez déja un compte ?
 					<b>
-						<a href="{{ path('app_login') }}">
-							Connexion</a>
+						<a href="{{ path('app_login') }}">Connexion</a>
 					</b>
 			{% endif %}
 			</div>
-
 		</div>
 	</div>
 </div>
