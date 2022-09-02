@@ -4,9 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use Stripe\Charge;
+use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -45,10 +49,11 @@ class PaiementController extends AbstractController
     }
 
     /**
-     * @Route("/create-checkout-session", name="checkout")
+     * @Route("/order", name="order")
      */
-    public function checkout(SessionInterface $session)
+    public function order(Request $request, SessionInterface $session)
     {
+        $user = $this->getUser();
         $amount = 0;
         $panier = $session->get('panier', []);
         $panierWithData = [];
@@ -57,12 +62,13 @@ class PaiementController extends AbstractController
             $amount += $totalItem;
         }
 
-        \Stripe\Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
-        $session = \Stripe\Checkout\Session::create([
+        Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
+        $intent = Charge::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
                 'price' => $amount * 100,
-                'quantity' => 1,
+                'currency' => 'eur',
+                'source' => $request->request->get('stripeToken'), // renvoie null ? a demander a Stephane
             ]],
             'mode' => 'payment',
             'success_url' => $this->generateUrl('success', [], UrlGeneratorInterface::ABSOLUTE_URL),
@@ -72,10 +78,13 @@ class PaiementController extends AbstractController
             ],
         ]);
 
-        return new JsonResponse(['id' => $session->id]);
+        // return new JsonResponse(['id' => $session->id]);
 
         return $this->render('paiement/order.html.twig', [
             'panier' => $panier,
+            'intent' => $intent,
+            'amount' => $amount,
+            'panierWithData' => $panierWithData,
         ]);
     }
 

@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta  name="description"  content="Vente de vêtement et accessoires festifs !"/>
     <title>{% block title %}RAVEUR - Vêtements et d'accesoire festifs{% endblock %}</title>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
@@ -20,11 +21,11 @@
 <body>
     <div id="wrapper">
         <nav class="navbar">
-            <div id="logo">
-                <a href="{{path('app_home')}}"><img src="{{ asset('img/logo.jpg') }}" alt="logo-rave"></a>
-            </div>
-            <ul>
 
+                
+            
+            <ul>
+                <li class="btnNav"><a href="{{path('app_home')}}">RꓥVEUR</a></li>
                 <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 1 }) }}">HOMME</a></li>
                 <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 2 }) }}">FEMME</a></li>
                 <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 3 }) }}">NEON</a></li>
@@ -216,7 +217,7 @@
             );
             let checkoutButton = document.querySelector("#checkout-button");
             checkoutButton.addEventListener("click", function () {
-                fetch("{{ path('checkout') }}", {
+                fetch("{{ path('order') }}", {
                         method: "POST",
                     })
                     .then(function (response) {

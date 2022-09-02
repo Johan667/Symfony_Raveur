@@ -20,6 +20,8 @@ class PanierController extends AbstractController
         $panier = $session->get('panier', []);
         $panierWithData = [];
 
+        $intent = $request->request->get('stripeToken');
+
         // Tableau associatif qui contient un couple avec toutes les informations du produit et la quantité
         foreach ($panier as $id => $quantite) {
             $panierWithData[] = [
