@@ -16,7 +16,6 @@ card.addEventListener("change", (event) => {
 var form = document.getElementById('payment-form')
 form.addEventListener('submit', function(event) {
     event.preventDefault()
-
     stripe.createToken(card).then(function(result) {
         if(result.error) {
             var errorElement = document.getElementById('card-errors')

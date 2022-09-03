@@ -49,9 +49,9 @@ class PaiementController extends AbstractController
     }
 
     /**
-     * @Route("/order", name="order")
+     * @Route("/paiement", name="paiement")
      */
-    public function order(Request $request, SessionInterface $session)
+    public function paiement(Request $request, SessionInterface $session)
     {
         $user = $this->getUser();
         $amount = 0;
@@ -61,9 +61,9 @@ class PaiementController extends AbstractController
             $totalItem = $item['article']->getPrix() * $item['quantite'];
             $amount += $totalItem;
         }
-
-        Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
-        $intent = Charge::create([
+        if ($request->request->get('stripeToken')) {
+            Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
+            $intent = Charge::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
                 'price' => $amount * 100,
@@ -77,14 +77,14 @@ class PaiementController extends AbstractController
             'enabled' => true,
             ],
         ]);
+        } else {
+            echo ' Une erreur est survenue';
+        }
 
         // return new JsonResponse(['id' => $session->id]);
 
-        return $this->render('paiement/order.html.twig', [
+        return $this->render('paiement/index.html.twig', [
             'panier' => $panier,
-            'intent' => $intent,
-            'amount' => $amount,
-            'panierWithData' => $panierWithData,
         ]);
     }
 
