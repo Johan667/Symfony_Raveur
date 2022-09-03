@@ -1,27 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Inscrivez Vous</h1>
 <div class="container">
     <div class="row">
+    <div class="col-6">
+    {{ form_start(registrationForm, {'attr': {'class': 'form-full'}} ) }}
+        <h1 class="titre">Inscrivez vous</h1>
+        <div>{{ form_label(registrationForm.nom) }}<br>{{ form_widget(registrationForm.nom) }}</div>
+        <div>{{ form_label(registrationForm.prenom) }}<br>{{ form_widget(registrationForm.prenom) }}</div>
+        <div>{{ form_label(registrationForm.email) }}<br>{{ form_widget(registrationForm.email) }}</div>
+        <div>{{ form_label(registrationForm.telephone) }}<br>{{ form_widget(registrationForm.telephone) }}</div>
+        <div>{{ form_label(registrationForm.date_naissance) }}<br>{{ form_widget(registrationForm.date_naissance) }}</div>
+        <div>{{ form_label(registrationForm.plainPassword.first) }}<br>{{ form_widget(registrationForm.plainPassword.first) }}</div>
+        <div>{{ form_label(registrationForm.plainPassword.second) }}<br>{{ form_widget(registrationForm.plainPassword.second) }}</div>
+        </div>
+<p></p>
         <div class="col-6">
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        <div>{{ form_label(registrationForm.adresse) }}<br>{{ form_widget(registrationForm.adresse) }}</div>
+        <div>{{ form_label(registrationForm.code_postal) }}<br>{{ form_widget(registrationForm.code_postal) }}</div>
+        <div>{{ form_label(registrationForm.ville) }}<br>{{ form_widget(registrationForm.ville) }}</div>
+        <div>{{ form_label(registrationForm.pays) }}<br>{{ form_widget(registrationForm.pays) }}</div>
+                {{ form_label(registrationForm.agreeTerms) }}{{ form_widget(registrationForm.agreeTerms) }}
+        <p></p>
+        <button type="submit" class="btn btn-success">S'enregistrer</button>
+        </div>
 
-        <button type="submit" class="btn">M'inscrire</button>
     {{ form_end(registrationForm) }}
 
 </div>
 </div>
 </div>
 {% endblock %}
+
+
+    
+
+

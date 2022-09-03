@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}RAVEUR - Panier
+{% block title %}Raveur - Panier
 {% endblock %}
 
 
@@ -9,13 +9,13 @@
 	<div class="container">
 		<div class="row">
 
-				<h2>Votre Panier</h2>
+				<h2 class="titre-panier">Votre Panier</h2>
 				<table class="table">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col">Nom</th>
 							<th scope="col">Image</th>
-							<th scope="col">Prix</th>
+							<th scope="col">Prix unitaire</th>
 							<th scope="col">Quantité</th>
 							<th scope="col">Total</th>
 							<th scope="col">Supprimer article</th>
@@ -38,21 +38,21 @@
 								<td>{{ item.article.prix * item.quantite}}
 									€</td>
 								<td>
-									<a href="{{ path('panier_supprimer', {'id': item.article.id})}}" class="btn btn-danger sm">
-										<i class="fas fa-trash"></i>
-									</a>
+									<a href="{{ path('panier_supprimer', {'id': item.article.id})}}" class="btn btn-danger sm">x</a>
+										
+									
 								</td>
 							</tr>
 						{% endfor %}
 					</tbody>
 					<tfoot>
 						<tr>
-							<td colspan="3" class="text-right">
-								<b>TOTAL</b>:															
-								<b>{{ amount }}</b></td>
-								<td>€</td>
-							<td><p class="center"><a class="btn-action mya" href="{{ path("paiement") }}">Acheter</a></p></td>
+							<td colspan="3" class="text-right">	
+							<td></td>
+							<td><b>TOTAL:<p class="center">{{ amount}}€</p></b></td>
+							<td><b><a class="btn-acheter" href="{{ path("paiement") }}">Acheter</a></b></td>
 						</tr>
+						
 					</tfoot>
 				</table>
 				
