@@ -71,7 +71,7 @@ class Commande
     private $devise;
 
     /**
-     * @ORM\ManyToMany(targetEntity=article::class, inversedBy="commandes")
+     * @ORM\ManyToMany(targetEntity=Article::class, inversedBy="commandes")
      */
     private $article_id;
 
@@ -241,7 +241,7 @@ class Commande
         return $this;
     }
 
-    public function removeArticleId(article $articleId): self
+    public function removeArticleId(Article $articleId): self
     {
         $this->article_id->removeElement($articleId);
 

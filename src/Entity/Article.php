@@ -2,22 +2,16 @@
 
 namespace App\Entity;
 
-use App\Entity\Taille;
-use App\Entity\Stocker;
-use App\Entity\Commande;
-use App\Entity\Categorie;
-use Doctrine\ORM\Mapping\Index;
-use Doctrine\ORM\Mapping as ORM;
-use App\Entity\CollectionArticle;
 use App\Repository\ArticleRepository;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 // https://www.youtube.com/watch?v=S9yhk4V1Fcg expliquer cette video
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
- * @ORM\Table(name="article", indexes={@ORM\Index(columns={"denomination","description"}, flags={"fulltext"})})
+ * @ORM\Table(name="Article", indexes={@ORM\Index(columns={"denomination","description"}, flags={"fulltext"})})
  */
 class Article
 {
@@ -316,7 +310,8 @@ class Article
         return $this;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->denomination;
     }
 
@@ -346,6 +341,4 @@ class Article
 
         return $this;
     }
-
-
 }

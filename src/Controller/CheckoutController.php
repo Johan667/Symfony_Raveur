@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Commande;
 use App\Form\CheckoutType;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use App\Repository\ArticleRepository;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,10 +18,38 @@ class CheckoutController extends AbstractController
     /**
      * @Route("/checkout", name="app_checkout")
      */
-    public function index(ManagerRegistry $doctrine, Session $session, Commande $commande): Response
+    public function index(Session $session, ArticleRepository $articleRepository, Request $request): Response
     {
-        $commande = $doctrine->getRepository(Commande::class)->findAll($commande->getId());
-        $formCheckout = $this->createForm(CheckoutType::class, $commande);
+        $amount = 0;
+        $session = $request->getSession();
+        $panier = $session->get('panier', []);
+        $panierWithData = [];
+
+        $intent = $request->request->get('stripeToken');
+
+        foreach ($panier as $id => $quantite) {
+            $panierWithData[] = [
+                'article' => $articleRepository->find($id),
+                'quantite' => $quantite,
+            ];
+        }
+        foreach ($panierWithData as $item) {
+            $totalItem = $item['article']->getPrix() * $item['quantite'];
+            $amount += $totalItem;
+        }
+
+        // $formCheckout = $this->createForm(CheckoutType::class, $commande);
+        // $commande = new Commande();
+        // $commande->setAdresseLivraison($formCheckout->get('adresse_livraison'))
+        //         ->setdateCommande(new DateTimeImmutable())
+        //         ->setCpLivraison($formCheckout->get('cp_livraison'))
+        //         ->setVilleLivraison($formCheckout->get('ville_livraison'))
+        //         ->setPaysLivraison($formCheckout->get('pays_livraison'));
+
+        // $doctrine->getManager()->persist($commande);
+        // $doctrine->getManager()->flush();
+
+        // $formCheckout->handleRequest($request);
 
         $amount = 0;
         $panier = $session->get('panier', []);
@@ -46,7 +76,7 @@ class CheckoutController extends AbstractController
         return $this->render('checkout/index.html.twig', [
             'items' => $panierWithData,
             'amount' => $amount,
-            'formCheckout' => $formCheckout->createView(),
+            'panier' => $panier,
         ]);
     }
 }

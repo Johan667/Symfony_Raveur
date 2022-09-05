@@ -1,20 +1,41 @@
 {% extends 'base.html.twig' %}
+{% block stylesheet %}
+	<link rel="stylesheet" href="{{ asset('js/checkout.css') }}"/>
+{% endblock %}
 
-{% block title %}Récapitulatif de votre commande{% endblock %}
+{% block title %}Récapitulatif de votre commande
+{% endblock %}
 
 {% block body %}
-<h1>1. Adresse de livraison</h1>
-{{ form(formCheckout)}}
-
-<h1>2. Adresse de Paiement</h1>
-
-
-
-<h1>3. Récapitulatif Commande</h1>
+	<div class="container">
+		<div class="row">
+			<div class="col-6">
+				<div class="info-livraison">
+					<h1>1. Adresse de livraison</h1>
 
 
+					<h1>2. Adresse de Paiement</h1>
 
-      <form action="/create-checkout-session.php" method="POST">
-        <button type="submit" id="checkout-button">Checkout</button>
-      </form>
+
+				</div>
+			</div>
+			<div class="col-6">
+
+				<h1>3. Récapitulatif Commande</h1>
+				<b>TOTAL:<p class="center">{{ amount }}€</p>
+				</b>
+
+			</div>
+			<h1>4. Paiement</h1><br>
+
+			<br><br>
+			<button class="btn btn-success" type="submit" id="checkout-button">Paiement</button>
+		</form>
+	</div>
+
+{% endblock %}
+{% block javascripts %}
+	<script src="https://js.stripe.com/v3/"></script>
+	<script src="/js/checkout.js" defer></script>
+
 {% endblock %}

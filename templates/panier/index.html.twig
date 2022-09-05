@@ -6,8 +6,8 @@
 
 {% block body %}
 	{% if app.user  %}
-	<div class="container">
-		<div class="row">
+		<div class="container">
+			<div class="row">
 
 				<h2 class="titre-panier">Votre Panier</h2>
 				<table class="table">
@@ -35,45 +35,50 @@
 								<td>{{ item.article.prix }}
 									€</td>
 								<td>{{ item.quantite }}</td>
-								<td>{{ item.article.prix * item.quantite}}
+								<td><b>{{ item.article.prix * item.quantite}}</b>
 									€</td>
 								<td>
 									<a href="{{ path('panier_supprimer', {'id': item.article.id})}}" class="btn btn-danger sm">x</a>
-										
-									
+
 								</td>
 							</tr>
 						{% endfor %}
 					</tbody>
 					<tfoot>
 						<tr>
-							<td colspan="3" class="text-right">	
+							<td colspan="3" class="text-right"></td>
 							<td></td>
-							<td><b>TOTAL:<p class="center">{{ amount}}€</p></b></td>
-							<td><b><a class="btn-acheter" href="{{ path("app_checkout") }}">Acheter</a></b></td>
+							<td>
+								<b>TOTAL:<p class="center">{{ amount}}€</p>
+								</b>
+							</td>
+							<td>
+								<b>
+									<a class="btn-acheter" href="{{ path("app_checkout") }}">Acheter</a>
+								</b>
+							</td>
 						</tr>
-						
+
 					</tfoot>
 				</table>
-				
-	 			
-			<div class="col-6">
-		{% else %}
-				<form method="post" id="payment-form">
-					Vous avez déja un compte ?
-					<b>
-						<a href="{{ path('app_login') }}">Connexion</a>
-					</b>
-			{% endif %}
+
+
+				<div class="col-6">
+				{% else %}
+					<form method="post" id="payment-form">
+						Vous avez déja un compte ?
+						<b>
+							<a href="{{ path('app_login') }}">Connexion</a>
+						</b>
+					{% endif %}
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 {% endblock %}
 
 {% block javascripts %}
-<script src="https://js.stripe.com/v3/">
-</script>
-<script src="/js/stripeCustom.js"></script>
+	<script src="https://js.stripe.com/v3/"></script>
+	<script src="/js/stripeCustom.js"></script>
 {% endblock %}

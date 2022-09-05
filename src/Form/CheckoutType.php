@@ -12,13 +12,11 @@ class CheckoutType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('prix_total')
-            ->add('date_commande')
+
             ->add('adresse_livraison')
             ->add('cp_livraison')
             ->add('ville_livraison')
             ->add('pays_livraison')
-            ->add('devise')
 
         ;
     }

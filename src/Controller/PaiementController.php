@@ -61,9 +61,9 @@ class PaiementController extends AbstractController
             $totalItem = $item['article']->getPrix() * $item['quantite'];
             $amount += $totalItem;
         }
-        if ($request->request->get('stripeToken')) {
-            Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
-            $intent = Charge::create([
+
+        Stripe::setApiKey('sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL');
+        $intent = Charge::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
                 'price' => $amount * 100,
@@ -77,9 +77,6 @@ class PaiementController extends AbstractController
             'enabled' => true,
             ],
         ]);
-        } else {
-            echo ' Une erreur est survenue';
-        }
 
         // return new JsonResponse(['id' => $session->id]);
 
