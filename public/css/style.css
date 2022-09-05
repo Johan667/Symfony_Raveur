@@ -197,6 +197,35 @@
   margin-bottom: 40px;
   background-color: #000;
 }
+/* CSS MON COMPTE */
+
+.bonjour{
+  margin-bottom: 3rem;
+}
+.info-perso, .info-livraison, .info-password{
+  border: solid 1px black;
+  box-shadow: 0 15px 15px rgba(0, 0, 0.1, 0.5);
+  padding: 15px;
+}
+
+.info-perso{
+  margin-bottom: 3rem;
+}
+.info-password{
+  margin-bottom: 10rem;
+}
+
+.info-livraison{
+  margin-bottom: 3rem;
+}
+
+.bonjour{
+  text-align: center;
+  padding: 1rem;
+}
+
+
+
 
 
 

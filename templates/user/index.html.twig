@@ -6,64 +6,73 @@
 {% block body %}
 {% if app.user %}
 
- 
-
-	<div class="container-compte">
-		<h1>Bonjour
-			{{ app.user.prenom }}! ✅</h1>
-
-		<h2>
-			<strong>Modifier les informations personelles</strong>
-		</h2>
-		{{ form_start(form) }}
-		{{ form_row(form.nom) }}
-		{{ form_row(form.prenom) }}
-		{{ form_row(form.email) }}
-		{{ form_row(form.telephone) }}
-
-		<h2>
-			<strong>Modifier l'adresse de livraison</strong>
-		</h2>
-		{{ form_row(form.adresse) }}
-		{{ form_row(form.ville) }}
-		{{ form_row(form.codePostal) }}
-		{{ form_row(form.pays) }}
-		{{ form_end(form) }}
 
 
-		<h2>
-			Modifier mot de passe
-		</h2>
-		{{ form_start(password) }}
-		{{ form_row(password.oldPassword) }}
-		{{ form_row(password.newPassword) }}
-		{{ form_row(password.reset) }}
-		{{ form_end(password) }}
+<div class="container-compte">
+	<div class="bonjour"><h1>Bonjour
+		<b>{{ app.user.prenom }}</b>! ✅</h1></div><br>
+	<div class="container">
+		<div class="row">
+			<div class="col-6">
+				<div class="info-perso">
+					<h2>
+						<i class="fa-solid fa-user-astronaut"></i>&nbsp;<strong>Modifier les informations personelles</strong>
+					</h2>
+					{{ form_start(form) }}
+					{{ form_row(form.nom) }}
+					{{ form_row(form.prenom) }}
+					{{ form_row(form.email) }}
+					{{ form_row(form.telephone) }}
+				</div>
+				<div class="info-livraison">
+					<h2>
+						<strong>Modifier l'adresse de livraison</strong>
+					</h2>
+					{{ form_row(form.adresse) }}
+					{{ form_row(form.ville) }}
+					{{ form_row(form.codePostal) }}
+					{{ form_row(form.pays) }}
+					{{ form_end(form) }}
+				</div>
+			</div>
 
-		<h2>
-			Désactiver mon compte
-		</h2>
-		<a href="{{ path('delete_account') }}">Cliquez ici</a>
-
-	</div>
-
-	{% else %}
-
-    {% if app.user %}
-        <div class="mb-3">
-            Vous êtes connecté {{ app.user.userIdentifier }}<br>
-            <a href="{{ path('app_logout') }}"> Me déconnecter </a>
-        </div>
-    {% endif %}
-<div class="container">
-    <div class="row">
-        <div class="col-6">
-            <h1 class="h3 mb-3 font-weight-normal"><a href="{{ path('app_login') }}">Connectez vous</h1>
+			<div class="col-6">
+				<div class="info-password">
+					<h2>
+						Modifier mot de passe
+					</h2>
+					{{ form_start(password) }}
+					{{ form_row(password.oldPassword) }}
+					{{ form_row(password.newPassword) }}
+					{{ form_row(password.reset) }}
+					{{ form_end(password) }}
+				</div>
+				<h2>
+					Désactiver mon compte
+				</h2>
+				<a href="{{ path('delete_account') }}">Cliquez ici</a>
+			</div>
 
 
-        <a href="{{ path('inscription') }}">Pas de compte ? Inscrivez vous </a>
-        </div>
-    </div>
-</div>
-{% endif %}
-{% endblock %}
+		</div>
+
+		{% else %}
+
+		{% if app.user %}
+		<div class="mb-3">
+			Vous êtes connecté {{ app.user.userIdentifier }}<br>
+			<a href="{{ path('app_logout') }}"> Me déconnecter </a>
+		</div>
+		{% endif %}
+		<div class="container">
+			<div class="row">
+				<div class="col-6">
+					<h1 class="h3 mb-3 font-weight-normal"><a href="{{ path('app_login') }}">Connectez vous</h1>
+
+
+					<a href="{{ path('inscription') }}">Pas de compte ? Inscrivez vous </a>
+				</div>
+			</div>
+		</div>
+		{% endif %}
+		{% endblock %}
