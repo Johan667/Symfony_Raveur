@@ -32,7 +32,14 @@
 			<div class="card" style="width: 18rem;">
 				<img src="{{ asset('img/' ~ article.image) }}" class="card-img-top" alt="{{ article }}">
 				<div class="card-body">
-					<h5 class="card-title">{{ article }}<br></h5>
+					<h5 class="card-title">{{ article }}<br>
+					{% if article.nouveau %}
+					<div class="text text-warning">Nouveau !</div>
+					{% endif %}
+					{% if article.tendance %}
+					<div class="text text-warning">Tendance !</div>
+					{% endif %}
+					</h5>
 					<p class="card-text">{{ article.prix }}€<br><br>
 						<a href="{{ path('produit_detail', {'id' : article.id}) }}" class="acheter">Acheter</a>
 					</p>

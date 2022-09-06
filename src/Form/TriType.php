@@ -18,29 +18,35 @@ class TriType extends AbstractType
     {
         $builder
 
-        // ->add('prixUn', NumberType::class, [
-        //     'required' => false,
-        //     'label' => 'Prix de :',
-        // ])
-        // ->add('prixDeux', NumberType::class, [
-        //     'required' => false,
-        //     'label' => ' à ',
-        // ])
+        ->add('max', NumberType::class, [
+            'label' => false,
+            'required' => false,
+            'attr' => [
+                'placeholder' => 'Prix maximum',
+            ],
+        ])
+        ->add('min', NumberType::class, [
+            'label' => false,
+            'required' => false,
+            'attr' => [
+                'placeholder' => 'Prix minimum',
+            ],
+        ])
             // ->add('couleur')
             // ->add('taille')
             ->add('nouveau', CheckboxType::class, [
                 'required' => false,
-                'label' => 'Nouveau :',
+                'label' => 'Nouveau',
             ])
             ->add('tendance', CheckboxType::class, [
                 'required' => false,
-                'label' => 'Tendance :',
+                'label' => 'Tendance',
             ])
             // ->add('collectionArticle')
             ->add('categorie', EntityType::class, [
                 'required' => false,
                 'class' => Categorie::class,
-                'label' => 'Categorie :',
+                'label' => 'Categorie',
             ])
             ->add('filtrer', SubmitType::class, [
                 'attr' => [

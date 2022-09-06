@@ -60,28 +60,14 @@ class ArticleRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
-    public function TriBar(bool $nouveau = null, float $prixUn = null, float $prixDeux = null, int $limit = null, int $offset = null)
+    /**
+     * Récupere les produits en lien avec une recherche.
+     *
+     * @return Product[]
+     */
+    public function findSearch(): array
     {
-        $qb = $this->getEntityManager()->createQueryBuilder();
-        $qb->select('p')
-            ->from('App\Entity\Produit', 'p')
-            ->where('p.nouveau = true');
-
-        if ($nouveau === true) {
-            $qb->andWhere('p.nouveau > 0');
-        }
-        if ($prixUn !== null) {
-            $qb->andWhere('p.prix > :prix')
-            ->setParameter(':prix', $prixUn);
-        }
-        if ($prixDeux !== null) {
-            $qb->andWhere('p.prix < :prix')
-            ->setParameter(':prix', $prixDeux);
-        }
-
-        $query = $qb->getQuery();
-
-        return $query->execute();
+        return $this->findAll();
     }
 
 //    /**

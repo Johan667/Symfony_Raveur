@@ -206,6 +206,7 @@
   border: solid 1px black;
   box-shadow: 0 15px 15px rgba(0, 0, 0.1, 0.5);
   padding: 15px;
+  background: white;
 }
 
 .info-perso{
@@ -223,11 +224,13 @@
   text-align: center;
   padding: 1rem;
 }
-
-
-
-
-
+.bg-account{
+  position: absolute;
+  z-index: 0;
+  width: 1300px;
+  height:750px;
+  background-image:url(img/homfeu.jpg);
+}
 
 /* CSS PAGE LISTE DES PRODUITS */
 

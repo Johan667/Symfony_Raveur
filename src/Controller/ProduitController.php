@@ -2,25 +2,19 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Article;
-use App\Entity\Commande;
-use App\Entity\User;
+use App\Entity\Categorie;
+use App\Form\TriType;
 use App\Repository\ArticleRepository;
-use App\Services\StripeService;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProduitController extends AbstractController
 {
-    public function __construct(EntityManagerInterface $entityManager, StripeService $stripeService)
-    {
-        $this->em = $entityManager;
-        $this->stripeService = $stripeService;
-    }
-
     /**
      * @Route("/produit", name="app_produit")
      */
@@ -28,6 +22,23 @@ class ProduitController extends AbstractController
     {
         return $this->render('produit/index.html.twig', [
             'controller_name' => 'ProduitController',
+        ]);
+    }
+
+    /**
+     * @Route("/produit/categorie/{id}", name="produit_categorie")
+     */
+    public function AfficherCategorie(Categorie $categorie, ArticleRepository $repository, Request $request): Response
+    {
+        $data = new SearchData();
+        $TriForm = $this->createForm(TriType::class);
+        $article = $repository->findSearch($data);
+        $TriForm->handleRequest($request);
+
+        return $this->render('produit/index.html.twig', [
+            'categorie' => $categorie,
+            'article' => $article,
+            'TriForm' => $TriForm->createView(),
         ]);
     }
 
@@ -43,15 +54,5 @@ class ProduitController extends AbstractController
             'articles' => $articles,
             'article' => $article,
         ]);
-    }
-
-    public function creation_commande(array $ressource, Article $article, User $user)
-    {
-        // une fois que le paiement est effectuer on injecte la commande en bdd
-        $commande = new Commande();
-
-        $commande->setDateCommande(new \Datetime());
-        $this->em->persist($commande);
-        $this->em->flush();
     }
 }
