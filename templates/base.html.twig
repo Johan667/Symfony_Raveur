@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta  name="description"  content="Vente de vêtement et accessoires festifs !"/>
+    <meta name="description" content="Vente de vêtement et accessoires festifs !" />
     <title>{% block title %}Raveur - Vêtements et d'accesoire festifs{% endblock %}</title>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
@@ -20,195 +20,212 @@
 
 <body>
     <div id="wrapper">
-        <nav class="navbar">
 
-                
-            
-            <ul>
-                <li class="btnNav"><a href="{{path('app_home')}}">RꓥVEUR</a></li>
-                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 1 }) }}">HOMME</a></li>
-                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 2 }) }}">FEMME</a></li>
-                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 3 }) }}">NEON</a></li>
-                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 4 }) }}">BIJOUX</a></li>
-                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 5 }) }}">CHAPEAU</a></li>
-                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 6 }) }}">FESTIVAL</a></li>
-                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 7 }) }}">ACCESSOIRES</a></li>
-                <li class="btnNav"><a href="{{ path('panier') }}"><i class="fa-solid fa-cart-shopping"></i></a></li>
+            <nav class="navbar">
 
-                {# Si l'utilisateur existe on lui affiche "mon compte" et "se deconnecter" #}
-                {% if app.user%}
-                <li class="btnNav"><a href="{{ path('app_user') }}"><i class="fa-solid fa-user"></i></a></li>
-                <li class="btnNav"><a href="{{ path('app_logout') }}"><i class="fa-solid fa-power-off"></i></a></li>
-                {% endif %}
-                <li class="btnNav"><a href="{{ path('app_login') }}"><i
-                            class="fa-solid fa-arrow-right-to-bracket"></i></a></li>
-                {# Si le rôle est celui de l'Admin alors on lui affiche l'icone d'administration #}
-                {% if is_granted("ROLE_ADMIN") %}
-                <li class="btnNav"><a href="{{ path('admin') }}">ADMIN</a></li>
-                {% endif %}
-            </ul>
+                <ul>
+ 
+                        <li class="btnNav"><a href="{{path('app_home')}}">RꓥVEUR</a></li>
+                        <div class="dropdown">
+                            PRODUITS
+                            <div class="dropdown-content">
+                                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 1 }) }}">HOMME</a></li>
+                                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 2 }) }}">FEMME</a></li>
+                                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 3 }) }}">NEON</a></li>
+                                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 4 }) }}">BIJOUX</a>
+                                </li>
+                                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 5 }) }}">CHAPEAU</a>
+                                </li>
+                                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 6 }) }}">FESTIVAL</a>
+                                </li>
+                                <li class="btnNav"><a
+                                        href="{{ path('produit_categorie', { 'id': 7 }) }}">ACCESSOIRES</a></li>
+                            </div>
+                        </div>
+  
+
+
+
+                        <li class="btnNav"><a href="{{ path('panier') }}"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </li>
+
+                        {# Si l'utilisateur existe on lui affiche "mon compte" et "se deconnecter" #}
+                        {% if app.user%}
+                        <li class="btnNav"><a href="{{ path('app_user') }}"><i class="fa-solid fa-user"></i></a></li>
+                        <li class="btnNav"><a href="{{ path('app_logout') }}"><i class="fa-solid fa-power-off"></i></a>
+                        </li>
+                        {% endif %}
+                        <li class="btnNav"><a href="{{ path('app_login') }}">Connexion</a></li>
+                        <li class="btnNav"><a href="{{ path('inscription') }}">Inscription</a></li>
+                        {# Si le rôle est celui de l'Admin alors on lui affiche l'icone d'administration #}
+                        {% if is_granted("ROLE_ADMIN") %}
+                        <li class="btnNav"><a href="{{ path('admin') }}">ADMIN</a></li>
+                        {% endif %}
+                </ul>
 
         </nav>
-        {% block body %}{% endblock %}
-        <footer class="site-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <h6>Qui sommes nous</h6>
-                        <li><a href="{{path('app_home')}}">Accueil</a></li>
-                        <li><a href="#">A propos</a></li>
-                        <li><a href="#">Histoire</a></li>
-                        <li><a href="www.johankasri.fr">Portfolio du développeur</a></li>
-                        <li><a href="{{path('app_contact')}}">Contact</a></li>
-                    </div>
 
-                    <div class="col-xs-6 col-md-3">
-                        <h6>Liens utiles</h6>
-                        <ul class="footer-links">
-                            <li><a href="#">Accueil</a></li>
-                            <li><a href="{{path('cookie')}}">Cookies</a></li>
-                            <li><a href="{{path('mentions')}}">Mentions Légale</a></li>
-                            <li><a href="{{path('confidentialite')}}">Politique de confidentialité</a></li>
-                            <li><a href="{{path('cgv')}}">CGV</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-xs-6 col-md-3">
-                        <h6>Service client</h6>
-                        <ul class="footer-links">
-                            <li><a href="{{path('app_contact')}}">Contactez nous</a></li>
-
-                        </ul>
-                    </div>
+    </div>
+    {% block body %}{% endblock %}
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <h6>Qui sommes nous</h6>
+                    <li><a href="{{path('app_home')}}">Accueil</a></li>
+                    <li><a href="#">A propos</a></li>
+                    <li><a href="#">Histoire</a></li>
+                    <li><a href="www.johankasri.fr">Portfolio du développeur</a></li>
+                    <li><a href="{{path('app_contact')}}">Contact</a></li>
                 </div>
-                <hr>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-sm-6 col-xs-12">
-                        <p class="copyright-text">Copyright &copy; 2022 Tout droits réserver
-                            <a href="www.raveur.fr">Raveur</a>.
-                        </p>
-                    </div>
 
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <ul class="social-icons">
-                            <li><a class="facebook" href="https://www.facebook.fr"><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="twitter" href="https://www.twitter.fr"><i class="fa fa-twitter"></i></a></li>
-                            <li><a class="linkedin" href="https://www.likendin.fr"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
+                <div class="col-xs-6 col-md-3">
+                    <h6>Liens utiles</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="{{path('cookie')}}">Cookies</a></li>
+                        <li><a href="{{path('mentions')}}">Mentions Légale</a></li>
+                        <li><a href="{{path('confidentialite')}}">Politique de confidentialité</a></li>
+                        <li><a href="{{path('cgv')}}">CGV</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <h6>Service client</h6>
+                    <ul class="footer-links">
+                        <li><a href="{{path('app_contact')}}">Contactez nous</a></li>
+
+                    </ul>
                 </div>
             </div>
-        </footer>
+            <hr>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <p class="copyright-text">Copyright &copy; 2022 Tout droits réserver
+                        <a href="www.raveur.fr">Raveur</a>.
+                    </p>
+                </div>
 
-        {% block javascripts %}
-        <script src="https://kit.fontawesome.com/3f1f47ed70.js" crossorigin="anonymous"></script>
-        <script src="/tarteaucitron/tarteaucitron.js"></script>
-        <script type="text/javascript">
-            var tarteaucitronForceLanguage = "fr";
-        </script>
-        <script type="text/javascript">
-            tarteaucitron.init({
-                "privacyUrl": "confidentialite",
-                /* URL page mentions */
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <ul class="social-icons">
+                        <li><a class="facebook" href="https://www.facebook.fr"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="twitter" href="https://www.twitter.fr"><i class="fa fa-twitter"></i></a></li>
+                        <li><a class="linkedin" href="https://www.likendin.fr"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-                "hashtag": "#tarteaucitron",
-                /* Ouvrir le panneau du hashtag */
-                "cookieName": "tarteaucitron",
-                /* Nom du cookie */
+    {% block javascripts %}
+    <script src="https://kit.fontawesome.com/3f1f47ed70.js" crossorigin="anonymous"></script>
+    <script src="/tarteaucitron/tarteaucitron.js"></script>
+    <script type="text/javascript">
+        var tarteaucitronForceLanguage = "fr";
+    </script>
+    <script type="text/javascript">
+        tarteaucitron.init({
+            "privacyUrl": "confidentialite",
+            /* URL page mentions */
 
-                "orientation": "middle",
-                /* Position banniere (top - bottom) */
+            "hashtag": "#tarteaucitron",
+            /* Ouvrir le panneau du hashtag */
+            "cookieName": "tarteaucitron",
+            /* Nom du cookie */
 
-                "groupServices": false,
-                /* Groupe les services par categories */
+            "orientation": "middle",
+            /* Position banniere (top - bottom) */
 
-                "showAlertSmall": false,
-                /* Petite alerte en bas a droite */
-                "cookieslist": false,
-                /* Montre la liste des cookies */
+            "groupServices": false,
+            /* Groupe les services par categories */
 
-                "closePopup": false,
-                /* Fermer le popup */
+            "showAlertSmall": false,
+            /* Petite alerte en bas a droite */
+            "cookieslist": false,
+            /* Montre la liste des cookies */
 
-                "showIcon": true,
-                /* Montrer l'icone cookie */
-                //"iconSrc": "", /* Optionnal: URL or base64 encoded image */
-                "iconPosition": "BottomLeft",
-                /* BottomRight, BottomLeft, TopRight and TopLeft */
+            "closePopup": false,
+            /* Fermer le popup */
 
-                "adblocker": false,
-                /* Detecte AD block */
+            "showIcon": true,
+            /* Montrer l'icone cookie */
+            //"iconSrc": "", /* Optionnal: URL or base64 encoded image */
+            "iconPosition": "BottomLeft",
+            /* BottomRight, BottomLeft, TopRight and TopLeft */
 
-                "DenyAllCta": true,
-                /* Montre le bouton refuser tout */
-                "AcceptAllCta": true,
-                /* Montre accepter tout */
-                "highPrivacy": true,
-                /* Desactive le contenu automatique */
+            "adblocker": false,
+            /* Detecte AD block */
 
-                "handleBrowserDNTRequest": false,
-                /* If Do Not Track == 1, disallow all */
+            "DenyAllCta": true,
+            /* Montre le bouton refuser tout */
+            "AcceptAllCta": true,
+            /* Montre accepter tout */
+            "highPrivacy": true,
+            /* Desactive le contenu automatique */
 
-                "removeCredit": true,
-                /* Retire le lien vers tarteaucitron */
-                "moreInfoLink": true,
-                /* Lien Plus d'infos */
+            "handleBrowserDNTRequest": false,
+            /* If Do Not Track == 1, disallow all */
 
-                "useExternalCss": false,
-                /* Si faut le CSS externe sera charger */
-                "useExternalJs": false,
-                /* Si faut le JS externe sera charger */
+            "removeCredit": true,
+            /* Retire le lien vers tarteaucitron */
+            "moreInfoLink": true,
+            /* Lien Plus d'infos */
 
-                //"cookieDomain": ".my-multisite-domaine.fr", /* Partage les cookies sur un multidomaine */
+            "useExternalCss": false,
+            /* Si faut le CSS externe sera charger */
+            "useExternalJs": false,
+            /* Si faut le JS externe sera charger */
 
-                "readmoreLink": "",
-                /* Changer le lien "lire plus"*/
+            //"cookieDomain": ".my-multisite-domaine.fr", /* Partage les cookies sur un multidomaine */
 
-                "mandatory": true,
-                /* Montre un message a propose des cookies "mandatory" */
-            });
-            tarteaucitron.services.mycustomservice = {
-                "key": "mycustomservice",
-                "type": "ads|analytic|api|comment|other|social|support|video",
-                "name": "MyCustomService",
-                "needConsent": true,
-                "cookies": ['cookie', 'cookie2'],
-                "readmoreLink": "/custom_read_more", // If you want to change readmore link
-                "js": function () {
-                    "use strict";
-                    // When user allow cookie
-                },
-                "fallback": function () {
-                    "use strict";
-                    // when use deny cookie
-                }
-            };
-        </script>
-        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-        <script src="/path/to/flickity.pkgd.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
-            integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous">
-        </script>
-        <script type="text/javascript">
-            window.$crisp = [];
-            window.CRISP_WEBSITE_ID = "65a05433-450c-44ee-8603-29c67224918f";
-            (function () {
-                d = document;
-                s = d.createElement("script");
-                s.src = "https://client.crisp.chat/l.js";
-                s.async = 1;
-                d.getElementsByTagName("head")[0].appendChild(s);
-            })();
-        </script>
-        {% endblock %}
+            "readmoreLink": "",
+            /* Changer le lien "lire plus"*/
+
+            "mandatory": true,
+            /* Montre un message a propose des cookies "mandatory" */
+        });
+        tarteaucitron.services.mycustomservice = {
+            "key": "mycustomservice",
+            "type": "ads|analytic|api|comment|other|social|support|video",
+            "name": "MyCustomService",
+            "needConsent": true,
+            "cookies": ['cookie', 'cookie2'],
+            "readmoreLink": "/custom_read_more", // If you want to change readmore link
+            "js": function () {
+                "use strict";
+                // When user allow cookie
+            },
+            "fallback": function () {
+                "use strict";
+                // when use deny cookie
+            }
+        };
+    </script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="/path/to/flickity.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript">
+        window.$crisp = [];
+        window.CRISP_WEBSITE_ID = "65a05433-450c-44ee-8603-29c67224918f";
+        (function () {
+            d = document;
+            s = d.createElement("script");
+            s.src = "https://client.crisp.chat/l.js";
+            s.async = 1;
+            d.getElementsByTagName("head")[0].appendChild(s);
+        })();
+    </script>
+    {% endblock %}
 </body>
 
 </html>
