@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Data\SearchData;
 use App\Entity\Article;
 use App\Entity\Categorie;
 use App\Form\TriType;
@@ -30,15 +29,21 @@ class ProduitController extends AbstractController
      */
     public function AfficherCategorie(Categorie $categorie, ArticleRepository $repository, Request $request): Response
     {
-        $data = new SearchData();
-        $TriForm = $this->createForm(TriType::class);
-        $article = $repository->findSearch($data);
-        $TriForm->handleRequest($request);
+        $triForm = $this->createForm(TriType::class, null);
+        // crée le formulaire configuré dans le dossier FORM
+        $triForm->handleRequest($request);
+        // traite les données du formulaire
+
+        if ($triForm->isSubmitted() && $triForm->isValid()) {
+            // si le formulaire est envoyé et validé alors :
+            $article = $repository->findSearch($triForm->getData());
+            // on passe le formulaire a la fonction du repository qui est un tableau classic : ArticleRepository
+        }
 
         return $this->render('produit/index.html.twig', [
             'categorie' => $categorie,
             'article' => $article,
-            'TriForm' => $TriForm->createView(),
+            'TriForm' => $triForm->createView(),
         ]);
     }
 

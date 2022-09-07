@@ -18,20 +18,20 @@ class TriType extends AbstractType
     {
         $builder
 
-        ->add('max', NumberType::class, [
-            'label' => false,
-            'required' => false,
-            'attr' => [
-                'placeholder' => 'Prix maximum',
-            ],
-        ])
-        ->add('min', NumberType::class, [
-            'label' => false,
-            'required' => false,
-            'attr' => [
-                'placeholder' => 'Prix minimum',
-            ],
-        ])
+        // ->add('max', NumberType::class, [
+        //     'label' => false,
+        //     'required' => false,
+        //     'attr' => [
+        //         'placeholder' => 'Prix maximum',
+        //     ],
+        // ])
+        // ->add('min', NumberType::class, [
+        //     'label' => false,
+        //     'required' => false,
+        //     'attr' => [
+        //         'placeholder' => 'Prix minimum',
+        //     ],
+        // ])
             // ->add('couleur')
             // ->add('taille')
             ->add('nouveau', CheckboxType::class, [

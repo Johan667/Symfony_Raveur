@@ -65,10 +65,44 @@ class ArticleRepository extends ServiceEntityRepository
      *
      * @return Product[]
      */
-    public function findSearch(): array
+    public function findSearch(bool $nouveau = null, bool $tendance = null)
     {
-        return $this->findAll();
+        $query = $this->createQueryBuilder('a');
+        // Crée une requête avec l'entité Article
+
+        if ($nouveau != null) {
+            // Si nouveau est différent de null une fois le form soumis, on le cherche içi :
+            $query->where('a.nouveau > 0')
+
+            ->setParameter('nouveau', $nouveau);
+        }
+        if ($tendance != null) {
+            $query->where('a.tendance > 0')
+            ->setParameter('tendance', $tendance);
+        }
+
+        return $query->getQuery()->getResult(); // On récupere les resultats
     }
+
+    // public function searchCount(bool $nouveau = null, bool $tendance = null)
+    // {
+    //     $qb = $this->getEntityManager()->createQueryBuilder();
+    //     $qb->select('COUNT(a.id)')
+    //         ->from('App\Entity\Article', 'a');
+
+    //     if ($nouveau === true) {
+    //         $qb->andWhere('p.promo > 0');
+    //         // ->setParameter(':promo', $promo);
+    //     }
+    //     if ($tendance === true) {
+    //         $qb->andWhere('p.promo > 0');
+    //     }
+
+    //     $qb->orderBy('a.id', 'DESC');
+    //     $query = $qb->getQuery();
+
+    //     return $query->getOneOrNullResult();
+    // }
 
 //    /**
 //     * @return Article[] Returns an array of Article objects
