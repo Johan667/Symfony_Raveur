@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Email;
 
 class RGPDController extends AbstractController
 {
@@ -22,10 +22,10 @@ class RGPDController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $mail = (new Email())
-                ->from($form->get('email')->getData())
-                ->to(new Address('johan.kasri@icloud.com', 'Admin Raveur'))
-                ->subject($form->get('objet')->getData())
-                ->text($form->get('message')->getData())
+            ->from($form->get('email')->getData())
+            ->to(new Address('johan.kasri@icloud.com', 'Admin Raveur'))
+            ->subject($form->get('objet')->getData())
+            ->text($form->get('message')->getData())
             ;
 
             $mailer->send($mail);
