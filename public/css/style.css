@@ -621,3 +621,15 @@ font-size: 50px;
     font-weight:600
   }
 }
+
+.container-contact form{
+  padding:5rem;
+  border: solid black 1px;
+  text-align: center;
+  margin-bottom: 5rem;
+  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+}
+.container-contact h2{
+  text-align: center;
+
+}

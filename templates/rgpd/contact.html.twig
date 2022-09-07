@@ -1,12 +1,14 @@
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Contact{% endblock %}
 
 {% block body %}
-<div>
-    <div class="center">
-        {{ form_start(form) }}
+<div class="container-contact">
+    <div class="row">
+    <div class="col-3"></div>
+        <div class="col-6">
+        <h2> Contactez nous </h2>
+            {{ form_start(form) }}
             <div>
                 {{ form_label(form.email) }}<br>
                 {{ form_widget(form.email) }}
@@ -19,7 +21,9 @@
                 {{ form_label(form.message) }}<br>
                 {{ form_widget(form.message) }}
             </div>
-        {{ form_end(form) }}
+            {{ form_end(form) }}
+        </div>
+        <div class="col-3"></div>
     </div>
 </div>
 {% endblock %}

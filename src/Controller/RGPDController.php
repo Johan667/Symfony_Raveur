@@ -29,7 +29,7 @@ class RGPDController extends AbstractController
             ;
 
             $mailer->send($mail);
-            $this->addFlash('sucess', 'Votre demande à bien été prise en compte nous y repondrons au plus tard 48 heures après votre demande!');
+            // $this->addFlash('sucess', 'Votre demande à bien été prise en compte nous y repondrons au plus tard 48 heures après votre demande!');
 
             return $this->redirectToRoute('app_home');
         }
