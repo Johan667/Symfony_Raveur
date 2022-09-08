@@ -36,13 +36,19 @@ class ProduitController extends AbstractController
 
         if ($triForm->isSubmitted() && $triForm->isValid()) {
             // si le formulaire est envoyé et validé alors :
-            $article = $repository->findSearch($triForm->getData());
+            $articlesFound = $repository->findSearch(
+                    $triForm->get('nouveau')->getData(),
+                    $triForm->get('tendance')->getData()
+                );
+
+            return $this->render('search/index.html.twig', [
+                    'articlesFound' => $articlesFound,
+                ]);
             // on passe le formulaire a la fonction du repository qui est un tableau classic : ArticleRepository
         }
 
         return $this->render('produit/index.html.twig', [
             'categorie' => $categorie,
-            'article' => $article,
             'TriForm' => $triForm->createView(),
         ]);
     }

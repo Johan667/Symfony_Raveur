@@ -46,7 +46,7 @@
 
 
 
-                        <li class="btnNav"><a href="{{ path('panier') }}"><i class="fa-solid fa-cart-shopping"></i></a>
+                        <li class="btnNav"><a href="{{ path('panier') }}">PANIER</a>
                         </li>
 
                         {# Si l'utilisateur existe on lui affiche "mon compte" et "se deconnecter" #}
@@ -55,8 +55,8 @@
                         <li class="btnNav"><a href="{{ path('app_logout') }}"><i class="fa-solid fa-power-off"></i></a>
                         </li>
                         {% endif %}
-                        <li class="btnNav"><a href="{{ path('app_login') }}">Connexion</a></li>
-                        <li class="btnNav"><a href="{{ path('inscription') }}">Inscription</a></li>
+                        <li class="btnNav"><a href="{{ path('app_login') }}">CONNEXION</a></li>
+                        <li class="btnNav"><a href="{{ path('inscription') }}">INSCRIPTION</a></li>
                         {# Si le rôle est celui de l'Admin alors on lui affiche l'icone d'administration #}
                         {% if is_granted("ROLE_ADMIN") %}
                         <li class="btnNav"><a href="{{ path('admin') }}">ADMIN</a></li>

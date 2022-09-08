@@ -65,20 +65,23 @@ class ArticleRepository extends ServiceEntityRepository
      *
      * @return Product[]
      */
-    public function findSearch(bool $nouveau = null, bool $tendance = null)
+    public function findSearch(bool $nouveau = null, bool $tendance = null, int $idCategorie = null)
     {
         $query = $this->createQueryBuilder('a');
         // Crée une requête avec l'entité Article
+        if ($idCategorie !== null) {
+            $query->andWhere('a.categorie = :categorie')
+            ->setParameter(':categorie', $idCategorie);
+        }
 
         if ($nouveau != null) {
             // Si nouveau est différent de null une fois le form soumis, on le cherche içi :
-            $query->where('a.nouveau > 0')
-
-            ->setParameter('nouveau', $nouveau);
+            $query->andWhere('a.nouveau > 0');
+            // ->setParameter('nouveau', $nouveau);
         }
         if ($tendance != null) {
-            $query->where('a.tendance > 0')
-            ->setParameter('tendance', $tendance);
+            $query->andWhere('a.tendance > 0');
+            // ->setParameter('tendance', $tendance);
         }
 
         return $query->getQuery()->getResult(); // On récupere les resultats
