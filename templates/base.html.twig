@@ -26,24 +26,17 @@
                 <ul>
  
                         <li class="btnNav"><a href="{{path('app_home')}}">RꓥVEUR</a></li>
-                        <div class="dropdown">
-                            PRODUITS
-                            <div class="dropdown-content">
                                 <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 1 }) }}">HOMME</a></li>
                                 <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 2 }) }}">FEMME</a></li>
-                                <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 3 }) }}">NEON</a></li>
+                                {# <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 3 }) }}">NEON</a></li>
                                 <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 4 }) }}">BIJOUX</a>
                                 </li>
                                 <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 5 }) }}">CHAPEAU</a>
                                 </li>
                                 <li class="btnNav"><a href="{{ path('produit_categorie', { 'id': 6 }) }}">FESTIVAL</a>
-                                </li>
+                                </li> #}
                                 <li class="btnNav"><a
                                         href="{{ path('produit_categorie', { 'id': 7 }) }}">ACCESSOIRES</a></li>
-                            </div>
-                        </div>
-  
-
 
 
                         <li class="btnNav"><a href="{{ path('panier') }}">PANIER</a>
@@ -65,7 +58,7 @@
 
         </nav>
 
-    </div>
+
     {% block body %}{% endblock %}
     <footer class="site-footer">
         <div class="container">

@@ -65,14 +65,14 @@ class ArticleRepository extends ServiceEntityRepository
      *
      * @return Product[]
      */
-    public function findSearch(bool $nouveau = null, bool $tendance = null, int $idCategorie = null)
+    public function findSearch(bool $nouveau = null, bool $tendance = null, float $prixMin = null, float $prixMax = null)
     {
         $query = $this->createQueryBuilder('a');
         // Crée une requête avec l'entité Article
-        if ($idCategorie !== null) {
-            $query->andWhere('a.categorie = :categorie')
-            ->setParameter(':categorie', $idCategorie);
-        }
+        // if ($idCategorie !== null) {
+        //     $query->andWhere('a.categorie = :categorie')
+        //     ->setParameter(':categorie', $idCategorie);
+        // }
 
         if ($nouveau != null) {
             // Si nouveau est différent de null une fois le form soumis, on le cherche içi :
@@ -83,23 +83,32 @@ class ArticleRepository extends ServiceEntityRepository
             $query->andWhere('a.tendance > 0');
             // ->setParameter('tendance', $tendance);
         }
+        // if ($prixMin !== null) {
+        //     $query->andWhere('a.prix > :prix')
+        //     ->setParameter(':prix', $prixMin);
+        // }
+        // if ($prixMax !== null) {
+        //     $query->andWhere('a.prix < :prix')
+        //     ->setParameter(':prix', $prixMax);
+        // }
 
         return $query->getQuery()->getResult(); // On récupere les resultats
     }
 
-    // public function searchCount(bool $nouveau = null, bool $tendance = null)
-    // {
-    //     $qb = $this->getEntityManager()->createQueryBuilder();
-    //     $qb->select('COUNT(a.id)')
-    //         ->from('App\Entity\Article', 'a');
+    public function searchCount(bool $nouveau = null, bool $tendance = null)
+    {
+        $query = $this->getEntityManager()->createQueryBuilder();
+        $query->select('COUNT(a.id)')
+            ->from('App\Entity\Article', 'a');
 
-    //     if ($nouveau === true) {
-    //         $qb->andWhere('p.promo > 0');
-    //         // ->setParameter(':promo', $promo);
-    //     }
-    //     if ($tendance === true) {
-    //         $qb->andWhere('p.promo > 0');
-    //     }
+        if ($nouveau === true) {
+            $query->andWhere('a.nouveau > 0');
+            // ->setParameter(':nouveau', $nouveau);
+        }
+        if ($tendance === true) {
+            $query->andWhere('a.tendance > 0');
+        }
+    }
 
     //     $qb->orderBy('a.id', 'DESC');
     //     $query = $qb->getQuery();

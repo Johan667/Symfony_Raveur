@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProduitController extends AbstractController
@@ -27,18 +28,18 @@ class ProduitController extends AbstractController
     /**
      * @Route("/produit/categorie/{id}", name="produit_categorie")
      */
-    public function AfficherCategorie(Categorie $categorie, ArticleRepository $repository, Request $request): Response
+    public function AfficherCategorie(Categorie $categorie, ArticleRepository $repository, Request $request, Session $session): Response
     {
         $triForm = $this->createForm(TriType::class, null);
-        // crée le formulaire configuré dans le dossier FORM
+        // Crée le formulaire configuré dans le dossier FORM
+
         $triForm->handleRequest($request);
         // traite les données du formulaire
 
         if ($triForm->isSubmitted() && $triForm->isValid()) {
-            // si le formulaire est envoyé et validé alors :
             $articlesFound = $repository->findSearch(
                     $triForm->get('nouveau')->getData(),
-                    $triForm->get('tendance')->getData()
+                    $triForm->get('tendance')->getData(),
                 );
 
             return $this->render('search/index.html.twig', [

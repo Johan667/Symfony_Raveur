@@ -18,15 +18,17 @@ class TriType extends AbstractType
     {
         $builder
 
-        // ->add('max', NumberType::class, [
+        // ->add('prixMax', NumberType::class, [
         //     'label' => false,
+        //     'mapped' => false,
         //     'required' => false,
         //     'attr' => [
         //         'placeholder' => 'Prix maximum',
         //     ],
         // ])
-        // ->add('min', NumberType::class, [
+        // ->add('prixMin', NumberType::class, [
         //     'label' => false,
+        //     'mapped' => false,
         //     'required' => false,
         //     'attr' => [
         //         'placeholder' => 'Prix minimum',
@@ -43,11 +45,11 @@ class TriType extends AbstractType
                 'label' => 'Tendance',
             ])
             // ->add('collectionArticle')
-            ->add('categorie', EntityType::class, [
-                'required' => false,
-                'class' => Categorie::class,
-                'label' => 'Categorie',
-            ])
+            // ->add('categorie', EntityType::class, [
+            //     'required' => false,
+            //     'class' => Categorie::class,
+            //     'label' => 'Categorie',
+            // ])
             ->add('filtrer', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn-action',
