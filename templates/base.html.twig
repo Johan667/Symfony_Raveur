@@ -39,22 +39,25 @@
             <div class="nav-links">
                 <a href="{{ path('produit_categorie', { 'id': 1 }) }}">HOMME</a>
                 <a href="{{ path('produit_categorie', { 'id': 2 }) }}">FEMME</a>
+                <a href="{{ path('panier') }}">PANIER</a>
                 {# <a href="{{ path('produit_categorie', { 'id': 3 }) }}">NEON</a>
                 <a href="{{ path('produit_categorie', { 'id': 4 }) }}">BIJOUX</a>
                 <a href="{{ path('produit_categorie', { 'id': 5 }) }}">CHAPEAU</a>
                 <a href="{{ path('produit_categorie', { 'id': 6 }) }}">FESTIVAL</a>
                 <a href="{{ path('produit_categorie', { 'id': 7 }) }}">ACCESSOIRES</a> #}
                 {# Si l'utilisateur existe on lui affiche "mon compte" et "se deconnecter" #}
-                {% if app.user%}
+                {% if app.user %}
                 <a href="{{ path('app_user') }}"><i class="fa-solid fa-user"></i></a>
                 <a href="{{ path('app_logout') }}"><i class="fa-solid fa-power-off"></i></a>
                 {% endif %}
-                <a href="{{ path('panier') }}">PANIER</a>
+               
+                {% if not app.user %}
                 <a href="{{ path('app_login') }}">CONNEXION</a></li>
                 <a href="{{ path('inscription') }}">INSCRIPTION</a></li>
+                {% endif %} 
                 {# Si le rôle est celui de l'Admin alors on lui affiche l'icone d'administration #}
                 {% if is_granted("ROLE_ADMIN") %}
-                <li class="btnNav"><a href="{{ path('admin') }}">ADMIN</a></li>
+                <a href="{{ path('admin') }}">ADMIN</a>
                 {% endif %} 
             </div>
         </div>

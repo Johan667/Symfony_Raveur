@@ -114,9 +114,11 @@
 
 @media (max-width:600px) {
   .contenant{
-    background-color: red;
+    display:none;
   }
-
+  .searchbar{
+    display:none;
+  }
 }
 
 /* CSS PAGE D'ACCUEIL */
@@ -733,6 +735,15 @@ font-size: 50px;
   text-align: center;
   margin-bottom: 2rem;
 
+}
+
+.login{
+  margin:auto;
+  padding:5rem;
+}
+.log{
+text-align: center;
+margin-bottom: 3rem;
 }
 
 
