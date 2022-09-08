@@ -2,6 +2,7 @@
 
 * {
     box-sizing: border-box;
+    
 }
 
 #wrapper {
@@ -64,17 +65,6 @@
     transform: translate(-50%, -50%);
   }
 
-  .searchbar{
-    width: 1300px;
-    margin-bottom: 2rem;
-
-  }
-
-
-  .searchbar button{
-    margin-left: 40%;
-    font-size: larger;
-  }
 
 .example {
     position: relative;
@@ -633,3 +623,40 @@ font-size: 50px;
   text-align: center;
 
 }
+
+/* BARRE DE RECHERCHE */
+.searchbar{
+  text-align: center;
+}
+
+.searchbar input[type="search"]{
+  text-align: center;
+}
+#search_article_Rechercher {
+  color:#0066ff;
+  text-align: center;
+  padding: 0 30px;
+  cursor: pointer;
+  margin-bottom: 2rem;
+
+}
+
+#search_article_mots, #search_article_categorie {
+  margin:auto;
+  text-align: center;
+  display: -webkit-box;
+  display: flex;
+  position: relative;
+  width: 500px;
+  box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+}
+
+#search_article_mots, #search_article_categorie  > * {
+  border: 0;
+  padding: 0 0 0 10px;
+  text-align: center;
+  margin-bottom: 2rem;
+
+}
+
