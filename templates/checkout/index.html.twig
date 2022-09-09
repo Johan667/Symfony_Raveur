@@ -10,28 +10,21 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-6">
-				<div class="info-livraison">
-					<h1>1. Adresse de livraison</h1>
+			 {{ form_start(formCommande, {'attr': {'class': 'form-full'}} ) }}
+                <h1 class="titre">Informations de Livraison</h1>
+                <div>{{ form_label(formCommande.adresse_livraison) }}<br>{{ form_widget(formCommande.adresse_livraison) }}</div>
+                <div>{{ form_label(formCommande.cp_livraison) }}<br>{{ form_widget(formCommande.cp_livraison) }}</div>
+                <div>{{ form_label(formCommande.ville_livraison) }}<br>{{ form_widget(formCommande.ville_livraison) }}</div>
+                <div>{{ form_label(formCommande.pays_livraison) }}<br>{{ form_widget(formCommande.pays_livraison) }}</div>
 
+                <button type="submit" class="btn btn-success">S'enregistrer</button>
+                {{ form_end(formCommande) }}
+            </div>
+            </div>
 
-					<h1>2. Adresse de Paiement</h1>
-
-
-				</div>
-			</div>
-			<div class="col-6">
-
-				<h1>3. Récapitulatif Commande</h1>
-				<b>TOTAL:<p class="center">{{ amount }}€</p>
-				</b>
-
-			</div>
-			<h1>4. Paiement</h1><br>
-
-			<br><br>
-			<button class="btn btn-success" type="submit" id="checkout-button">Paiement</button>
-		</form>
-	</div>
+</div>
+</div>
+</div>
 
 {% endblock %}
 {% block javascripts %}

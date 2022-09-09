@@ -3,15 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Commande;
-use App\Form\CheckoutType;
+use App\Form\CommandeType;
 use App\Repository\ArticleRepository;
-use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class CheckoutController extends AbstractController
 {
@@ -38,18 +36,21 @@ class CheckoutController extends AbstractController
             $amount += $totalItem;
         }
 
-        // $formCheckout = $this->createForm(CheckoutType::class, $commande);
+        $formCommande = $this->createForm(CommandeType::class);
+        $formCommande->handleRequest($request);
+
         // $commande = new Commande();
-        // $commande->setAdresseLivraison($formCheckout->get('adresse_livraison'))
-        //         ->setdateCommande(new DateTimeImmutable())
-        //         ->setCpLivraison($formCheckout->get('cp_livraison'))
-        //         ->setVilleLivraison($formCheckout->get('ville_livraison'))
-        //         ->setPaysLivraison($formCheckout->get('pays_livraison'));
+        // if ($formCommande->isSubmitted() && $formCommande->isValid()) {
+        //     $commande
+        //         ->setDateCommande(new \DateTimeImmutable())
+        //         ->setAdresseLivraison('adresse_livraison')
+        //         ->setCpLivraison('cp_livraison')
+        //         ->setVilleLivraison('ville_livraison')
+        //         ->setPaysLivraison('pays_livraison');
 
-        // $doctrine->getManager()->persist($commande);
-        // $doctrine->getManager()->flush();
-
-        // $formCheckout->handleRequest($request);
+        //     $doctrine->getManager()->persist($commande);
+        //     $doctrine->getManager()->flush();
+        // }
 
         $amount = 0;
         $panier = $session->get('panier', []);
@@ -59,24 +60,12 @@ class CheckoutController extends AbstractController
             $totalItem = $item['article']->getPrix() * $item['quantite'];
             $amount += $totalItem;
         }
-        // $checkout_session = Session::create([
-        //     'line_items' => [[
-        //       // Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-        //       'price' => $amount,
-        //       'quantity' => 1,
-        //     ]],
-        //     'mode' => 'payment',
-        //     'success_url' => $this->generateUrl('success', [], UrlGeneratorInterface::ABSOLUTE_URL),
-        //     'cancel_url' => $this->generateUrl('error', [], UrlGeneratorInterface::ABSOLUTE_URL),
-        //     'automatic_tax' => [
-        //       'enabled' => true,
-        //     ],
-        //   ]);
 
         return $this->render('checkout/index.html.twig', [
             'items' => $panierWithData,
             'amount' => $amount,
             'panier' => $panier,
+            'formCommande' => $formCommande->createView(),
         ]);
     }
 }
