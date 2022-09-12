@@ -75,6 +75,11 @@ class Commande
      */
     private $article_id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commandes")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->stockers = new ArrayCollection();
@@ -244,6 +249,18 @@ class Commande
     public function removeArticleId(Article $articleId): self
     {
         $this->article_id->removeElement($articleId);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
