@@ -6,6 +6,7 @@ use App\Entity\Commande;
 use App\Form\CommandeType;
 use App\Repository\ArticleRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Stripe\StripeClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,9 +37,23 @@ class CheckoutController extends AbstractController
             $totalItem = $item['article']->getPrix() * $item['quantite'];
             $amount += $totalItem;
         }
+        $user = $commande = $doctrine->getRepository(User::class);
         $commande = $doctrine->getRepository(Commande::class);
         $formCommande = $this->createForm(CommandeType::class);
         $formCommande->handleRequest($request);
+
+        $stripe = new StripeClient(
+            'sk_test_51L6amqAgDjI611jf49n3RURuEVn6KbawPxt0CKby4wsENM9plWmKeqkq7Cm3Sl1W4JcvjewbvVCBrwyA5knu6b2500QdV5lalL'
+          );
+        $stripe->tokens->create([
+            'person' => [
+              'first_name' => 'Jane',
+              'last_name' => 'Doe',
+              'relationship' => ['owner' => true],
+            ],
+          ]);
+
+        // dd($stripe);
 
         $commande = new Commande();
 
@@ -47,17 +62,16 @@ class CheckoutController extends AbstractController
             $adresse_livraison = $request->request->get('adresse_livraison');
             // $cp_livraison = $request->request->get('cp_livraison');
             // $ville = $request->request->get('ville_livraison');
-            $pays_livraison = $request->request->get('pays_livraison');
+            // $pays_livraison = $request->request->get('pays_livraison');
             $devise = '€';
 
-            // dd($commande);
             $commande
                 ->setUser($this->getUser())
                 ->setPrixTotal($amount)
                 ->setDevise($devise)
                 ->setDateCommande(new \DateTimeImmutable())
                 ->setAdresseLivraison('adresse_livraison', $adresse_livraison)
-                ->setPaysLivraison('pays_livraison', $pays_livraison);
+                ->setPaysLivraison('FRANCE');
             //  ->setArticleId('items', $panierWithData);
 
             $doctrine->getManager()->persist($commande);
@@ -73,7 +87,7 @@ class CheckoutController extends AbstractController
             $amount += $totalItem;
         }
 
-        return $this->render('checkout/index.html.twig', [
+        return $this->render('paiement/index.html.twig', [
             'items' => $panierWithData,
             'amount' => $amount,
             'panier' => $panier,

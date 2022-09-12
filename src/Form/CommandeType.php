@@ -50,11 +50,11 @@ class CommandeType extends AbstractType
                         ]),
                 ],
             ])
-                ->add('pays_livraison', TextType::class, [
-                    'required' => true,
-                    'label' => 'Pays :',
-                    'attr' => ['class' => 'input-full'],
-                ])
+                // ->add('pays_livraison', TextType::class, [
+                //     'required' => true,
+                //     'label' => 'Pays :',
+                //     'attr' => ['class' => 'input-full'],
+                // ])
             ->add('Enregistrer', SubmitType::class, [
                 'label' => 'Enregistrer',
                 'attr' => [
