@@ -119,6 +119,13 @@
   .searchbar{
     display:none;
   }
+  .container-turbo a{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .festival img{
+    display:none;
+  }
 }
 
 /* CSS PAGE D'ACCUEIL */
@@ -241,6 +248,10 @@
   padding: 80px;
   text-decoration: none;
   box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+}
+
+.container-festival{
+  display: flex;
 }
 
 .festival{
@@ -503,6 +514,7 @@ font-size: 50px;
 /** VIDEO BACK GROUND **/
 
 #background-video {
+  display:flex;
   height: 600px;
   width: 1300px;
   object-fit: cover;
@@ -710,7 +722,10 @@ font-size: 50px;
   text-align: center;
 }
 #search_article_Rechercher {
-  color:#0066ff;
+  color:white;
+  font-size: 1,5rem;
+  background-color: #000;
+  padding: 5rem;
   text-align: center;
   padding: 0 30px;
   cursor: pointer;
